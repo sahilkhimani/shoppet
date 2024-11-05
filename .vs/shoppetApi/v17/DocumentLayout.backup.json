@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "D:\\C#\\shoppetApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\C#\\shoppetApi\\Migrations\\20241104113630_petshopdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20241104113630_petshopdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\data\\apidbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:data\\apidbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\helper\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20241104113630_petshopdb.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Migrations\\20241104113630_petshopdb.cs",
-              "RelativeDocumentMoniker": "Migrations\\20241104113630_petshopdb.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Migrations\\20241104113630_petshopdb.cs",
-              "RelativeToolTip": "Migrations\\20241104113630_petshopdb.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T11:36:30.281Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApiDbContext.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Data\\ApiDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApiDbContext.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Data\\ApiDbContext.cs",
-              "RelativeToolTip": "Data\\ApiDbContext.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAkwBIAAAA7AAAAAAAAAA==",
+              "Title": "PasswordHelper.cs",
+              "DocumentMoniker": "D:\\C#\\shoppetApi\\Helper\\PasswordHelper.cs",
+              "RelativeDocumentMoniker": "Helper\\PasswordHelper.cs",
+              "ToolTip": "D:\\C#\\shoppetApi\\Helper\\PasswordHelper.cs",
+              "RelativeToolTip": "Helper\\PasswordHelper.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwBsAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T11:33:47.595Z",
+              "WhenOpened": "2024-11-05T09:52:17.082Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Order.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAAB0AAAAFAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\C#\\shoppetApi\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\C#\\shoppetApi\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAowEwAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T11:29:21.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\UnitOfWork\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "UnitOfWork\\UnitOfWork.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\UnitOfWork\\UnitOfWork.cs",
-              "RelativeToolTip": "UnitOfWork\\UnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T09:40:52.894Z",
+              "WhenOpened": "2024-11-05T08:23:33.627Z",
               "EditorCaption": ""
             }
           ]
