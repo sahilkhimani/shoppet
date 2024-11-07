@@ -1,32 +1,6 @@
 [
   {
     "ContainingType": "shoppetApi.Controllers.UserController",
-    "Method": "LoginUser",
-    "RelativePath": "api/User/login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "loginDTO",
-        "Type": "shoppetApi.DTO.LoginDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "PetShopApi.Models.User",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "shoppetApi.Controllers.UserController",
     "Method": "RegisterUser",
     "RelativePath": "api/User/signup",
     "HttpMethod": "POST",

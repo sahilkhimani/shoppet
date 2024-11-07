@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
+using shoppetApi.Services;
 using shoppetApi.UnitOfWork;
 
 namespace shoppetApi.Controllers
@@ -12,76 +13,34 @@ namespace shoppetApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public UserController(IUnitOfWork unitOfWork)
+        public UserController(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         [HttpPost("signup")]
         public async Task<ActionResult<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
         {
-            if (await _unitOfWork.Users.GetByEmailAsync(userRegistrationDTO.UserEmail) != null)
+            if (!ModelState.IsValid)
             {
-                return Conflict("Email Already in Use");
+                return BadRequest(ModelState);
             }
-            else
+            try
             {
-                var user = new User
+                var result = await _userService.RegisterUser(userRegistrationDTO);
+                if (!result.Success)
                 {
-                    UserName = userRegistrationDTO.UserName,
-                    UserEmail = userRegistrationDTO.UserEmail,
-                    Password = PasswordHelper.HashPassword(userRegistrationDTO.Password),
-                    PhoneNo = userRegistrationDTO.PhoneNo,
-                    RoleId = userRegistrationDTO.RoleId,
-                };
-
-                await _unitOfWork.Users.Add(user);
-                await _unitOfWork.SaveAsync();
-
-
-                var role = _unitOfWork.Roles.GetById(user.RoleId);
-
-                return Ok(new
-                {
-                    Message = "SignUp Succesfull",
-                    user.UserName,
-                    user.UserEmail,
-                    user.PhoneNo,
-                    role?.Result.RoleName,
-                });
-
-            }
-        }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<User>> LoginUser(LoginDTO loginDTO){
-
-            var user = await _unitOfWork.Users.GetByEmailAsync(loginDTO.UserEmail);
-            if(user == null)
-            {
-                return Unauthorized("Invalid Credentials");
-            }
-            else
-            {
-               if(!PasswordHelper.VerifyPassword(loginDTO.Password, user.Password))
-                {
-                    return Unauthorized("Invalid Credentials");
+                    return Conflict(result.Message);
                 }
-                else
-                {
-                    return Ok(new
-                    {
-                       Message = "Login Successfull",
-                       user.UserEmail,
-                       user.UserName,
-                       user.PhoneNo
-                    });
-                }
-            }
 
-            
+                return Ok(result.Message);
+            }
+            catch (Exception ex) {
+                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+            }
+           
         }
 
 

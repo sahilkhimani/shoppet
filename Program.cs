@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using shoppetApi.Interfaces;
 using shoppetApi.Repository;
+using shoppetApi.Services;
 using shoppetApi.UnitOfWork;
 
 
@@ -15,17 +16,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var provider = builder.Services.BuildServiceProvider();
-var config = provider.GetRequiredService<IConfiguration>();
-builder.Services.AddDbContext<ApiDbContext>(item => item.UseSqlServer(config.GetConnectionString("dbcs")));
+builder.Services.AddDbContext<ApiDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+
 builder.Services.AddScoped<IBreedRepository, BreedRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IPetRepository, PetRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ISpeciesRepository, SpeciesRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 var app = builder.Build();
 

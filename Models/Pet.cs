@@ -8,7 +8,7 @@ namespace PetShopApi.Models
         [Key]
         public int PetId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Please Enter the name of your pet")]
         public string PetName { get; set; }
 
         [Required]
@@ -23,10 +23,12 @@ namespace PetShopApi.Models
         public string PetGender { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int BreedId { get; set; }
         public Breed Breed { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         public User Owner { get; set; }

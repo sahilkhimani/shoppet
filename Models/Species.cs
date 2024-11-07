@@ -7,7 +7,7 @@ namespace PetShopApi.Models
         [Key]
         public int SpeciesId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Please Enter the species name")]
         public string SpeciesName { get; set; }
 
         public ICollection<Breed> Breeds { get; set; }

@@ -17,13 +17,15 @@ namespace PetShopApi.Models
 
         public string OrderStatus { get; set; }
 
-        [Required]  
+        [Required]
+        [Range(1, int.MaxValue)]
         public int BuyerId { get; set; }
 
         [ForeignKey("BuyerId")]
         public User Buyer { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int PetId { get; set; }
         public Pet Pet { get; set; }
 

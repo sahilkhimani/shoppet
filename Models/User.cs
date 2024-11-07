@@ -8,11 +8,11 @@ namespace PetShopApi.Models
         [Key]
         public int UserId { get; set; }
         
-        [Required]
+        [Required(ErrorMessage ="Please enter the username")]
         public string UserName { get; set; }
         
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="valid email address is required")]
         public string UserEmail { get; set; }
         
         [Required]
@@ -20,6 +20,7 @@ namespace PetShopApi.Models
         public string PhoneNo { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage ="Please Select the role")]
         public int RoleId { get; set; }
         public Role Role { get; set; }
 

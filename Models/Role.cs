@@ -8,7 +8,7 @@ namespace PetShopApi.Models
         [Key]
         public int RoleId { get; set; }
         
-        [Required]
+        [Required(ErrorMessage ="Please select the role")]
         public string RoleName { get; set; }
         public ICollection<User> Users { get; set; }
     }
