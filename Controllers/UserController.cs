@@ -43,6 +43,23 @@ namespace shoppetApi.Controllers
            
         }
 
+        [HttpPut("update")]
+        public async Task<ActionResult<User>> UpdateUser(int id, UserUpdateDTO userUpdateDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+               return BadRequest(ModelState);
+            }
+            var result = await _userService.UpdateUser(id, userUpdateDTO);
+            return Ok(result);
+        }
 
-}
+        [HttpDelete("delete")]
+        public async Task<ActionResult<User>> DeleteUser(int id) {
+           var result = await _userService.DeleteUser(id);
+            return Ok(result);
+        }
+
+
+    }
 }

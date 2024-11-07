@@ -15,7 +15,7 @@ namespace shoppetApi.Services
             _genericService = genericService;
             _unitOfWork = unitOfWork;
         }
-        public async Task<APIResponse<User>> LoginUser(LoginDTO loginDTO)
+        public async Task<APIResponse<User>> LoginUser(UserLoginDTO loginDTO)
         {
             
             throw new NotImplementedException();
@@ -40,6 +40,29 @@ namespace shoppetApi.Services
                 RoleId = userRegistrationDTO.RoleId,
             };
             return await _genericService.Add(user);
+        }
+
+        public async Task<APIResponse<User>> DeleteUser(int id)
+        {
+           var result = await _genericService.Delete(id);
+            return result;
+        }
+
+        public async Task<APIResponse<User>> UpdateUser(int id, UserUpdateDTO userUpdateDTO)
+        {
+            var entity = await _genericService.GetById(id);
+            if (entity != null) {
+              var result =  await _genericService.Update(id, new User
+                {
+                    UserEmail = userUpdateDTO.UserEmail,
+                    RoleId = userUpdateDTO.RoleId,
+                    UserName = userUpdateDTO.UserName,
+                    Password = PasswordHelper.HashPassword(userUpdateDTO.Password),
+                    PhoneNo = userUpdateDTO.PhoneNo,
+                });
+            return result;
+            }
+            return null;
         }
     }
 }

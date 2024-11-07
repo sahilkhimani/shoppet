@@ -39,7 +39,8 @@ namespace shoppetApi.Repository
 
         public async Task Update(T entity)
         {
-            _dbSet.Update(entity);   
+           _dbSet.Update(entity);
+
         }
     }
 }

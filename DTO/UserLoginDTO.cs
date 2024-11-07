@@ -2,7 +2,7 @@
 
 namespace shoppetApi.DTO
 {
-    public class LoginDTO
+    public class UserLoginDTO
     {
         [Required]
         [EmailAddress(ErrorMessage ="Please enter the valid email address")]

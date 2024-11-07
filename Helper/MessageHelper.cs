@@ -33,5 +33,9 @@
         {
             return $"{field} not found";
         }
+
+        public static string Message(string message) { 
+        return message ;
+        }
     }
 }

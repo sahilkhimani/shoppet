@@ -12,19 +12,21 @@ namespace shoppetApi.Services
         public GenericService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+
             _genericRepository = _unitOfWork.GenericRepository<T>();
+      
         }
 
         public async Task<APIResponse<T>> Add(T entity)
         {
             try
             {
-                //await _genericRepository.Add(entity);
-                //await _unitOfWork.SaveAsync();
+                await _genericRepository.Add(entity);
+                await _unitOfWork.SaveAsync();
                 return new APIResponse<T>
                 {
                     Success = true,
-                    Message = MessageHelper.Success($"{typeof(T).Name}", "created"),
+                    Message = MessageHelper.Success(typeof(T).Name, "created"),
                     Data = entity
                 };
             }
@@ -32,7 +34,7 @@ namespace shoppetApi.Services
                 return new APIResponse<T>
                 {
                     Success = false,
-                    Message = MessageHelper.Exception($"{typeof(T).Name}", "creating", ex.Message),
+                    Message = MessageHelper.Exception(typeof(T).Name, "creating", ex.Message),
                 };
             }
         }
@@ -41,32 +43,121 @@ namespace shoppetApi.Services
         {
             try
             {
-                var entity = _genericRepository.GetById(id);
-                if (entity == null)
+                var result = await _genericRepository.GetById(id);
+                if (result == null)
                 {
                     return new APIResponse<T>
                     {
                         Success = false,
-                        Message = MessageHelper.NotFound($"{typeof(T).Name}")
+                        Message = MessageHelper.NotFound(typeof(T).Name)
                     };
                 }
-                return entity;
+                await _genericRepository.Delete(id);
+                await _unitOfWork.SaveAsync();
+                return new APIResponse<T>
+                {
+                    Success = true,
+                    Message = MessageHelper.Success(typeof(T).Name, "deleted")
+                };
+            }
+            catch (Exception ex) {
+                return new APIResponse<T>
+                {
+                    Success = false,
+                    Message = MessageHelper.Exception(typeof(T).Name, "deleting", ex.Message)
+                };
             }
         }
 
-    public Task<APIResponse<IEnumerable<T>>> GetAll()
+        public async Task<APIResponse<IEnumerable<T>>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _genericRepository.GetAll();
+                if (result == null)
+                {
+                    return new APIResponse<IEnumerable<T>>()
+                    {
+                        Success = false,
+                        Message = MessageHelper.NotFound(typeof(T).Name),
+                    };
+                }
+                return new APIResponse<IEnumerable<T>>()
+                {
+                    Success = true,
+                    Message = MessageHelper.Success(typeof(T).Name, "fetched")
+                };
+            }
+            catch (Exception ex)
+            {
+                return new APIResponse<IEnumerable<T>>
+                {
+                    Success = false,
+                    Message = MessageHelper.Exception(typeof(T).Name, "fetching", ex.Message)
+                };
+            }
         }
 
-        public Task<APIResponse<T>> GetById(int id)
+        public async Task<APIResponse<T>> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _genericRepository.GetById(id);
+                if (result == null)
+                {
+                    return new APIResponse<T>
+                    {
+                        Success = false,
+                        Message = MessageHelper.NotFound(typeof(T).Name)
+                    };
+                }
+                return new APIResponse<T> {
+                    Success = true,
+                    Message = MessageHelper.Success(typeof(T).Name, "retrieved"),
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                return new APIResponse<T>
+                {
+                    Success = false,
+                    Message = MessageHelper.Exception(typeof(T).Name, "retrieving", ex.Message)
+                };
+            }
+
         }
 
-        public Task<APIResponse<T>> Update(T entity)
+        public async Task<APIResponse<T>> Update(int id, T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = await _genericRepository.GetById(id);
+                if(data == null)
+                {
+                    return new APIResponse<T>
+                    {
+                        Success = false,
+                        Message = MessageHelper.NotFound(typeof(T).Name)
+                    };
+                }
+
+                await _genericRepository.Update(entity);
+                await _unitOfWork.SaveAsync();
+                return new APIResponse<T>
+                {
+                    Success = true,
+                    Message = MessageHelper.Success(typeof(T).Name, "updated")
+                };
+            }
+            catch (Exception ex)
+            {
+                return new APIResponse<T>
+                {
+                    Success = false,
+                    Message = MessageHelper.Exception(typeof(T).Name, "updating", ex.Message)
+                };
+            }
         }
     }
 }

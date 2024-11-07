@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\C#\\shoppetApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\helper\\messagehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\messagehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppetapi\\helper\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MessageHelper.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Helper\\MessageHelper.cs",
-              "RelativeDocumentMoniker": "Helper\\MessageHelper.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Helper\\MessageHelper.cs",
-              "RelativeToolTip": "Helper\\MessageHelper.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAIwCEAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T08:18:46.62Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Services\\UserService.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Services\\UserService.cs",
-              "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCoAAAAJAAAAAAAAAA==",
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "D:\\C#\\shoppetApi\\Interfaces\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IGenericRepository.cs",
+              "ToolTip": "D:\\C#\\shoppetApi\\Interfaces\\IGenericRepository.cs",
+              "RelativeToolTip": "Interfaces\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T08:01:59.993Z",
+              "WhenOpened": "2024-11-07T14:33:10.003Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GenericService.cs",
-              "DocumentMoniker": "D:\\C#\\shoppetApi\\Services\\GenericService.cs",
-              "RelativeDocumentMoniker": "Services\\GenericService.cs",
-              "ToolTip": "D:\\C#\\shoppetApi\\Services\\GenericService.cs",
-              "RelativeToolTip": "Services\\GenericService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwCoAAAAwAAAAAAAAAA==",
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\C#\\shoppetApi\\Repository\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\GenericRepository.cs",
+              "ToolTip": "D:\\C#\\shoppetApi\\Repository\\GenericRepository.cs",
+              "RelativeToolTip": "Repository\\GenericRepository.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAIwCkAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T14:32:13.696Z",
+              "WhenOpened": "2024-11-07T14:30:31.446Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "APIResponse.cs",
+              "DocumentMoniker": "D:\\C#\\shoppetApi\\Helper\\APIResponse.cs",
+              "RelativeDocumentMoniker": "Helper\\APIResponse.cs",
+              "ToolTip": "D:\\C#\\shoppetApi\\Helper\\APIResponse.cs",
+              "RelativeToolTip": "Helper\\APIResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T14:23:43.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\C#\\shoppetApi\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "D:\\C#\\shoppetApi\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAACUAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAowDQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T12:20:27.731Z",
+              "WhenOpened": "2024-11-07T13:50:46.625Z",
               "EditorCaption": ""
             }
           ]
