@@ -142,7 +142,7 @@ namespace shoppetApi.Services
                     };
                 }
 
-                await _genericRepository.Update(entity);
+                await _genericRepository.Update(id, entity);
                 await _unitOfWork.SaveAsync();
                 return new APIResponse<T>
                 {

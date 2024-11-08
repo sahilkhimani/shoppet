@@ -51,16 +51,13 @@ namespace shoppetApi.Services
         public async Task<APIResponse<User>> UpdateUser(int id, UserUpdateDTO userUpdateDTO)
         {
             var entity = await _genericService.GetById(id);
-            if (entity != null) {
-              var result =  await _genericService.Update(id, new User
-                {
-                    UserEmail = userUpdateDTO.UserEmail,
-                    RoleId = userUpdateDTO.RoleId,
-                    UserName = userUpdateDTO.UserName,
-                    Password = PasswordHelper.HashPassword(userUpdateDTO.Password),
-                    PhoneNo = userUpdateDTO.PhoneNo,
-                });
-            return result;
+            if (entity.Data != null) {
+                entity.Data.UserName = userUpdateDTO.UserName;
+                entity.Data.Password = PasswordHelper.HashPassword(userUpdateDTO.Password);
+                entity.Data.PhoneNo = userUpdateDTO.PhoneNo;
+                var result = await _genericService.Update(id, entity.Data);
+               
+                return result;
             }
             return null;
         }
