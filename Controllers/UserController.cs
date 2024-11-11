@@ -1,26 +1,33 @@
-﻿using Azure.Identity;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Services;
-using shoppetApi.UnitOfWork;
+using System.Configuration;
+using System.Runtime.CompilerServices;
 
 namespace shoppetApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
-    {
-        private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+    public class UserController : ControllerBase{
+        private readonly IUserService _userService;
+        private readonly IGenericController<User> _genericController;
+        private readonly IMapper _mapper;
+
+
+        public UserController(IUserService userService, IGenericController<User> genericController, IMapper mapper)
+           
         {
             _userService = userService;
+            _genericController = genericController;
+            _mapper = mapper;
         }
 
-        [HttpPost("signup")]
+
+        [HttpPost("Register")]
         public async Task<ActionResult<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
         {
             if (!ModelState.IsValid)
@@ -37,29 +44,43 @@ namespace shoppetApi.Controllers
 
                 return Ok(result.Message);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
             }
-           
         }
 
-        [HttpPut("update")]
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult<User>> DeleteUser(int id)
+        {
+            try
+            {
+                var result = await _genericController.Delete(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+            }
+        }
+
+        [HttpPut("update/{id}")]
         public async Task<ActionResult<User>> UpdateUser(int id, UserUpdateDTO userUpdateDTO)
         {
             if (!ModelState.IsValid)
             {
-               return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
-            var result = await _userService.UpdateUser(id, userUpdateDTO);
-            return Ok(result);
+            try
+            {
+                if(id <=0) return BadRequest("Id is invalid");
+                var result = await _userService.UpdateUser(id, userUpdateDTO);
+                return Ok(result.Message);               
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+            }
         }
-
-        [HttpDelete("delete")]
-        public async Task<ActionResult<User>> DeleteUser(int id) {
-           var result = await _userService.DeleteUser(id);
-            return Ok(result);
-        }
-
-
     }
 }

@@ -85,7 +85,8 @@ namespace shoppetApi.Services
                 return new APIResponse<IEnumerable<T>>()
                 {
                     Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "fetched")
+                    Message = MessageHelper.Success(typeof(T).Name, "fetched"),
+                    Data = result
                 };
             }
             catch (Exception ex)

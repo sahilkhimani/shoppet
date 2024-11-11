@@ -258,3 +258,4 @@ D:\C#\shoppetApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.System
 D:\C#\shoppetApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\C#\shoppetApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\C#\shoppetApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+D:\C#\shoppetApi\bin\Debug\net8.0\AutoMapper.dll

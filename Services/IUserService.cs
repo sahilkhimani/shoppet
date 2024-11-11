@@ -11,6 +11,5 @@ namespace shoppetApi.Services
         public Task<APIResponse<User>> LoginUser(UserLoginDTO loginDTO);
 
         public Task<APIResponse<User>> UpdateUser(int id, UserUpdateDTO userUpdateDTO);
-        public Task<APIResponse<User>> DeleteUser(int id);
     }
 }
