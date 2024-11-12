@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PetShopApi.Models;
+using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Services;
+using System.Runtime.CompilerServices;
 
 namespace shoppetApi.Controllers
 {
@@ -102,6 +106,7 @@ namespace shoppetApi.Controllers
                 {
                     return BadRequest("The id is invalid");
                 }
+                
                 var result = await _genericService.Update(id, entity);
                 return Ok(result);
             }

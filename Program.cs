@@ -1,12 +1,7 @@
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using shoppetApi.Controllers;
 using shoppetApi.Helper;
-using shoppetApi.Interfaces;
-using shoppetApi.Repository;
-using shoppetApi.Services;
 using shoppetApi.UnitOfWork;
 
 
@@ -24,26 +19,16 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
-
 builder.Services.AddScoped(typeof(IGenericController<>), typeof(GenericController<>));
 
-builder.Services.AddScoped<IUserService, UserService>();
-
-
-builder.Services.AddScoped<IBreedRepository, BreedRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IPetRepository, PetRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<ISpeciesRepository, SpeciesRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+builder.Services.RegisterRepositories();
+builder.Services.RegisterServices();
+
+var app = builder.Build();
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,4 +1,6 @@
-﻿using shoppetApi.Helper;
+﻿using PetShopApi.Models;
+using shoppetApi.DTO;
+using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 using shoppetApi.UnitOfWork;
 
@@ -23,19 +25,10 @@ namespace shoppetApi.Services
             {
                 await _genericRepository.Add(entity);
                 await _unitOfWork.SaveAsync();
-                return new APIResponse<T>
-                {
-                    Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "created"),
-                    Data = entity
-                };
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "created"), entity);
             }
             catch (Exception ex) {
-                return new APIResponse<T>
-                {
-                    Success = false,
-                    Message = MessageHelper.Exception(typeof(T).Name, "creating", ex.Message),
-                };
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "creating", ex.Message), entity);
             }
         }
 
@@ -46,26 +39,14 @@ namespace shoppetApi.Services
                 var result = await _genericRepository.GetById(id);
                 if (result == null)
                 {
-                    return new APIResponse<T>
-                    {
-                        Success = false,
-                        Message = MessageHelper.NotFound(typeof(T).Name)
-                    };
+                    return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
                 await _genericRepository.Delete(id);
                 await _unitOfWork.SaveAsync();
-                return new APIResponse<T>
-                {
-                    Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "deleted")
-                };
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "deleted"), null);
             }
             catch (Exception ex) {
-                return new APIResponse<T>
-                {
-                    Success = false,
-                    Message = MessageHelper.Exception(typeof(T).Name, "deleting", ex.Message)
-                };
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "deleting", ex.Message), null);
             }
         }
 
@@ -76,26 +57,13 @@ namespace shoppetApi.Services
                 var result = await _genericRepository.GetAll();
                 if (result == null)
                 {
-                    return new APIResponse<IEnumerable<T>>()
-                    {
-                        Success = false,
-                        Message = MessageHelper.NotFound(typeof(T).Name),
-                    };
+                    return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
-                return new APIResponse<IEnumerable<T>>()
-                {
-                    Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "fetched"),
-                    Data = result
-                };
+                return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.NotFound(typeof(T).Name), result);
             }
             catch (Exception ex)
             {
-                return new APIResponse<IEnumerable<T>>
-                {
-                    Success = false,
-                    Message = MessageHelper.Exception(typeof(T).Name, "fetching", ex.Message)
-                };
+                return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "fetching", ex.Message), null);
             }
         }
 
@@ -104,27 +72,17 @@ namespace shoppetApi.Services
             try
             {
                 var result = await _genericRepository.GetById(id);
+
                 if (result == null)
                 {
-                    return new APIResponse<T>
-                    {
-                        Success = false,
-                        Message = MessageHelper.NotFound(typeof(T).Name)
-                    };
+                    return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
+
                 }
-                return new APIResponse<T> {
-                    Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "retrieved"),
-                    Data = result
-                };
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "retrieved"), result);
             }
             catch (Exception ex)
             {
-                return new APIResponse<T>
-                {
-                    Success = false,
-                    Message = MessageHelper.Exception(typeof(T).Name, "retrieving", ex.Message)
-                };
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "retrieving", ex.Message), null);
             }
 
         }
@@ -136,28 +94,18 @@ namespace shoppetApi.Services
                 var data = await _genericRepository.GetById(id);
                 if(data == null)
                 {
-                    return new APIResponse<T>
-                    {
-                        Success = false,
-                        Message = MessageHelper.NotFound(typeof(T).Name)
-                    };
+                    return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
 
                 await _genericRepository.Update(id, entity);
                 await _unitOfWork.SaveAsync();
-                return new APIResponse<T>
-                {
-                    Success = true,
-                    Message = MessageHelper.Success(typeof(T).Name, "updated")
-                };
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "updated"), null);
+
+               
             }
             catch (Exception ex)
             {
-                return new APIResponse<T>
-                {
-                    Success = false,
-                    Message = MessageHelper.Exception(typeof(T).Name, "updating", ex.Message)
-                };
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "updating", ex.Message), null);
             }
         }
     }

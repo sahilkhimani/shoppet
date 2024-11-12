@@ -15,15 +15,13 @@ namespace shoppetApi.Controllers
     public class UserController : ControllerBase{
         private readonly IUserService _userService;
         private readonly IGenericController<User> _genericController;
-        private readonly IMapper _mapper;
 
 
-        public UserController(IUserService userService, IGenericController<User> genericController, IMapper mapper)
+        public UserController(IUserService userService, IGenericController<User> genericController)
            
         {
             _userService = userService;
             _genericController = genericController;
-            _mapper = mapper;
         }
 
 
@@ -39,7 +37,7 @@ namespace shoppetApi.Controllers
                 var result = await _userService.RegisterUser(userRegistrationDTO);
                 if (!result.Success)
                 {
-                    return Conflict(result.Message);
+                    return Conflict(result.Message + result.Data);
                 }
 
                 return Ok(result.Message);
@@ -82,5 +80,7 @@ namespace shoppetApi.Controllers
                 return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
             }
         }
+
+
     }
 }

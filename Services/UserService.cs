@@ -22,6 +22,7 @@ namespace shoppetApi.Services
 
         public async Task<APIResponse<User>> LoginUser(UserLoginDTO loginDTO)
         {
+            
 
             throw new NotImplementedException();
         }
@@ -31,11 +32,7 @@ namespace shoppetApi.Services
             var existingUser = await _unitOfWork.Users.GetByEmailAsync(userRegistrationDTO.UserEmail);
             if (existingUser != null)
             {
-                return new APIResponse<User>
-                {
-                    Success = false,
-                    Message = MessageHelper.AlredyExists(userRegistrationDTO.UserEmail),
-                };
+                return APIResponse<User>.CreateResponse(false, MessageHelper.AlredyExists(userRegistrationDTO.UserEmail), null);
             }
             var user = _mapper.Map<User>(userRegistrationDTO);
             return await _genericService.Add(user);
@@ -46,11 +43,7 @@ namespace shoppetApi.Services
             var entity = await _genericService.GetById(id);
             if (entity.Data == null)
             {
-                return new APIResponse<User>
-                {
-                    Success = false,
-                    Message = MessageHelper.NotFound("The User is"),
-                };
+                return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound("The User is"), null);
             }
             
             entity.Data.UserName = userUpdateDTO.UserName;
