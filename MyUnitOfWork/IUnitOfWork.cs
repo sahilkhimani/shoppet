@@ -1,6 +1,6 @@
 ﻿using shoppetApi.Interfaces;
 
-namespace shoppetApi.UnitOfWork
+namespace shoppetApi.MyUnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {

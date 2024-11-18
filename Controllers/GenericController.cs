@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
@@ -10,17 +11,18 @@ namespace shoppetApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenericController<T> : ControllerBase, IGenericController<T> where T : class
+    public class GenericController<T, TAdd, TUpdate> : ControllerBase, IGenericController<T, TAdd, TUpdate> where T : class where TAdd : class where TUpdate : class
     {
         private readonly IGenericService<T> _genericService;
-
-        public GenericController(IGenericService<T> genericService)
+        private readonly IMapper _mapper;
+        public GenericController(IGenericService<T> genericService, IMapper mapper)
         {
             _genericService = genericService;
+            _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<T>> Add([FromBody] T entity)
+        [HttpPost("Create")]
+        public virtual async Task<ActionResult<T>> Add([FromBody] TAdd dto)
         {
             if (!ModelState.IsValid)
             {
@@ -28,7 +30,8 @@ namespace shoppetApi.Controllers
             }
             try
             {
-                var result = await _genericService.Add(entity);
+                var data = _mapper.Map<T>(dto);
+                var result = await _genericService.Add(data);
                 if (!result.Success)
                 {
                     return Conflict(result.Message);
@@ -42,15 +45,12 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<T>> Delete(int id)
+        [HttpDelete("Delete/{id}")]
+        public virtual async Task<ActionResult<T>> Delete(int id)
         {
             try
             {
-                if (id <= 0)
-                {
-                    return BadRequest("The id is invalid");
-                }
+                if (id <= 0) return BadRequest("Id is invalid");
                 var result = await _genericService.Delete(id);
                 return Ok(result.Message);
 
@@ -61,8 +61,8 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> GetAll()
+        [HttpGet("GetAll")]
+        public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
         {
             try
             {
@@ -74,16 +74,13 @@ namespace shoppetApi.Controllers
                 return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
             }
         }
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
 
-        public async Task<ActionResult<T>> GetById(int id)
+        public virtual  async Task<ActionResult<T>> GetById(int id)
         {
             try
             {
-                if (id <= 0)
-                {
-                    return BadRequest("The id is invalid");
-                }
+                if (id <= 0) return BadRequest("Id is invalid");
                 var result = await _genericService.GetById(id);
                 return Ok(result);
             }
@@ -92,9 +89,9 @@ namespace shoppetApi.Controllers
                 return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("Update{id}")]
 
-        public async Task<ActionResult<T>> Update(int id, [FromBody] T entity)
+        public virtual async Task<ActionResult<T>> Update(int id, [FromBody] TUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -102,13 +99,15 @@ namespace shoppetApi.Controllers
             }
             try
             {
-                if (id <= 0)
-                {
-                    return BadRequest("The id is invalid");
-                }
-                
-                var result = await _genericService.Update(id, entity);
-                return Ok(result);
+                if (id <= 0) return BadRequest("Id is invalid");
+                var data = await _genericService.GetById(id);
+                if (!data.Success) return NotFound(data.Message);
+
+                var updatedData = _mapper.Map(dto, data.Data);
+                var updated = _mapper.Map<T>(updatedData);
+
+                var result = await _genericService.Update(id, updated);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {

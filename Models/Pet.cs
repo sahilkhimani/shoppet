@@ -29,7 +29,7 @@ namespace PetShopApi.Models
 
         [Required]
         [Range(1, int.MaxValue)]
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         public User Owner { get; set; }
 

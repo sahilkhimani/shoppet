@@ -1,7 +1,7 @@
 ﻿using PetShopApi.Data;
 using shoppetApi.Interfaces;
 
-namespace shoppetApi.UnitOfWork
+namespace shoppetApi.MyUnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

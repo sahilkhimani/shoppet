@@ -1,15 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetShopApi.Models
 {
-    public class Role
+    public class Role : IdentityRole
     {
-        [Key]
-        public int RoleId { get; set; }
-        
-        [Required(ErrorMessage ="Please select the role")]
-        public string RoleName { get; set; }
-        public ICollection<User> Users { get; set; }
+        public string RoleDescription { get; set; }
     }
 }

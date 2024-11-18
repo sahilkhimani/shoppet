@@ -2,7 +2,7 @@
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
-using shoppetApi.UnitOfWork;
+using shoppetApi.MyUnitOfWork;
 
 namespace shoppetApi.Services
 {
@@ -28,7 +28,7 @@ namespace shoppetApi.Services
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "created"), entity);
             }
             catch (Exception ex) {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "creating", ex.Message), entity);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "creating", ex.Message), null);
             }
         }
 
@@ -59,7 +59,7 @@ namespace shoppetApi.Services
                 {
                     return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
-                return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.NotFound(typeof(T).Name), result);
+                return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "fetched"), result);
             }
             catch (Exception ex)
             {
@@ -92,11 +92,10 @@ namespace shoppetApi.Services
             try
             {
                 var data = await _genericRepository.GetById(id);
-                if(data == null)
+                if (data == null)
                 {
                     return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
-
                 await _genericRepository.Update(id, entity);
                 await _unitOfWork.SaveAsync();
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "updated"), null);

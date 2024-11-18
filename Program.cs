@@ -1,8 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using PetShopApi.Data;
 using shoppetApi.Controllers;
 using shoppetApi.Helper;
-using shoppetApi.UnitOfWork;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,15 +11,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApiDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddScoped(typeof(IGenericController<>), typeof(GenericController<>));
+builder.Services.AddScoped(typeof(IGenericController<,,>), typeof(GenericController<,,>));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+builder.Services.RegisterDb(builder.Configuration);
+builder.Services.JwtAuth(builder.Configuration);
+builder.Services.AuthPolicy();
+builder.Services.RegisterUnitOfWork();
 builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 

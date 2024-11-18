@@ -38,14 +38,8 @@ namespace shoppetApi.Repository
         }
 
         public async Task Update(int id, T entity)
-
         {
             _dbSet.Update(entity);
-            //_dbSet.Entry(entity).State = EntityState.Modified;
-            //var result = await _dbSet.FindAsync(id);
-
-               //_dbSet.Update(entity);
-            
         }
     }
 }

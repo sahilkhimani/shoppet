@@ -1,72 +1,15 @@
 [
   {
     "ContainingType": "shoppetApi.Controllers.UserController",
-    "Method": "DeleteUser",
-    "RelativePath": "api/User/Delete/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "PetShopApi.Models.User",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "shoppetApi.Controllers.UserController",
-    "Method": "RegisterUser",
+    "Method": "Register",
     "RelativePath": "api/User/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userRegistrationDTO",
+        "Name": "userRegistrationDto",
         "Type": "shoppetApi.DTO.UserRegistrationDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "PetShopApi.Models.User",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "shoppetApi.Controllers.UserController",
-    "Method": "UpdateUser",
-    "RelativePath": "api/User/update/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "userUpdateDTO",
-        "Type": "shoppetApi.DTO.UserUpdateDTO",
         "IsRequired": true
       }
     ],
