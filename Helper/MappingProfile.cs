@@ -8,8 +8,8 @@ namespace shoppetApi.Helper
     {
        public MappingProfile() {
             CreateMap<UserRegistrationDTO, User>()
-                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserEmail))
-                .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserEmail))
+                 .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
         }
 
     }

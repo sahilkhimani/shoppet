@@ -8106,11 +8106,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\shoppetApi\\shoppetApi.csproj",
+      "projectUniqueName": "D:\\C#\\shoppet-main\\shoppet-main\\shoppetApi.csproj",
       "projectName": "shoppetApi",
-      "projectPath": "D:\\C#\\shoppetApi\\shoppetApi.csproj",
+      "projectPath": "D:\\C#\\shoppet-main\\shoppet-main\\shoppetApi.csproj",
       "packagesPath": "C:\\Users\\khimasah\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\shoppetApi\\obj\\",
+      "outputPath": "D:\\C#\\shoppet-main\\shoppet-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khimasah\\AppData\\Roaming\\NuGet\\NuGet.Config",

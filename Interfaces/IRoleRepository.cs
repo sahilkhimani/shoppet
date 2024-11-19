@@ -4,6 +4,6 @@ namespace shoppetApi.Interfaces
 {
     public interface IRoleRepository : IGenericRepository<Role>
     {
-        Task<Role> GetRole(int roleId);
+        Task<Role> GetRole(string roleId);
     }
 }

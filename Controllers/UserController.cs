@@ -42,34 +42,31 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
 
-
-        //[HttpPost("Register")]
-        //public async Task<ActionResult<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    try
-        //    {
-        //        var result = await _userService.RegisterUser(userRegistrationDTO);
-        //        if (!result.Success)
-        //        {
-        //            return Conflict(result.Message);
-        //        }
-
-        //        return Ok(result.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
-        //    }
-        //}
-
+        [HttpPost("Login")]
+        public async Task<ActionResult<User>> Login([FromBody] UserLoginDTO userLoginDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+            var result = await _userService.LoginUser(userLoginDTO);
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
 
     }
     }

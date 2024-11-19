@@ -41,7 +41,7 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
 
@@ -57,7 +57,7 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
 
@@ -71,7 +71,7 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
         [HttpGet("GetById/{id}")]
@@ -86,7 +86,7 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
         [HttpPut("Update{id}")]
@@ -111,7 +111,7 @@ namespace shoppetApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, MessageHelper.ErrorOccured(ex.Message));
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
     }

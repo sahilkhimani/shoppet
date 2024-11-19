@@ -65,6 +65,7 @@ namespace shoppetApi.Helper
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
         };
     });
+            services.AddScoped<JwtTokenService>();
         }
 
         public static void AuthPolicy(this IServiceCollection services)

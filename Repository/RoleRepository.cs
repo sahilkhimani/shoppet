@@ -13,7 +13,7 @@ namespace shoppetApi.Repository
             _context = context;
         }
 
-        public async Task<Role> GetRole(int roleId)
+        public async Task<Role> GetRole(string roleId)
         {
            return await _context.FindAsync<Role>(roleId);  
         }

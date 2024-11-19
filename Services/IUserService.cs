@@ -9,6 +9,7 @@ namespace shoppetApi.Services
     {
         public Task<APIResponse<User>> LoginUser(UserLoginDTO userLoginDTO);
         public Task<APIResponse<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO);
+        public Task<bool> EmailAlreadyExists(string email);
 
     }
 }

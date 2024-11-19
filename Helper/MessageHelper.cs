@@ -2,40 +2,44 @@
 {
     public static class MessageHelper
     {
-        public static string Success(string entity, string action) 
-        { 
-            return $"{entity} has been successfully {action}"; 
+        public static string Success(string entity, string action)
+        {
+            return string.Format(MessageConstants.SuccessMessage, entity, action);
         }
 
-        public static string Failure(string entity, string action) {
-            return $"An error occured while {action} the {entity}";
+        public static string Failure(string entity, string action)
+        {
+            return string.Format(MessageConstants.FailureMessage, entity, action);
         }
 
-        public static string Exception(string entity, string action, string exception) {
-            return $"An exception occured while {action} the {entity}: {exception}";
+        public static string Exception(string entity, string action, string exception)
+        {
+            return string.Format(MessageConstants.ExceptionMessage, entity, action, exception);
         }
 
         public static string ValidationError(string field)
         {
-            return $"The {field} is invalid. Please check the {field}";
+            return string.Format(MessageConstants.ValidationErrorMessage, field);
         }
 
-        public static string AlredyExists(string field) {
-            return $"{field} already exists";
-        }
-
-        public static string ErrorOccured(string message)
+        public static string AlreadyExists(string field)
         {
-            return $"An unexpected error occured : {message}";
+            return string.Format(MessageConstants.AlreadyExistsMessage, field);
+        }
+
+        public static string ErrorOccurred(string message)
+        {
+            return string.Format(MessageConstants.ErrorOccuredMessage, message);
         }
 
         public static string NotFound(string field)
         {
-            return $"{field} not found";
+            return string.Format(MessageConstants.NotFoundMessage, field);
         }
 
-        public static string Message(string message) { 
-        return message ;
+        public static string Message(string message)
+        {
+            return message;
         }
     }
 }
