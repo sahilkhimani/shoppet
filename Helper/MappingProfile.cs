@@ -10,6 +10,11 @@ namespace shoppetApi.Helper
             CreateMap<UserRegistrationDTO, User>()
                  .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserEmail))
                  .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+
+            //CreateMap<UserUpdateDTO, User>()
+            //    .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+            CreateMap<UserUpdateDTO, User>();
+            //CreateMap<User, UserUpdateDTO>();
         }
 
     }

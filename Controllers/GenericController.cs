@@ -6,6 +6,7 @@ using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Services;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 
 namespace shoppetApi.Controllers
 {
@@ -24,10 +25,6 @@ namespace shoppetApi.Controllers
         [HttpPost("Create")]
         public virtual async Task<ActionResult<T>> Add([FromBody] TAdd dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var data = _mapper.Map<T>(dto);
@@ -46,11 +43,23 @@ namespace shoppetApi.Controllers
         }
 
         [HttpDelete("Delete/{id}")]
-        public virtual async Task<ActionResult<T>> Delete(int id)
+        public virtual async Task<ActionResult<T>> Delete(string id)
         {
             try
             {
-                if (id <= 0) return BadRequest(MessageConstants.InvalidId);
+                if (!CheckValidUser(id))
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                object parsedId = id;
+                if (int.TryParse(id, out var intId))
+                {
+                    if (intId <= 0)
+                    {
+                        return BadRequest(MessageConstants.InvalidId);
+                    }
+                    parsedId = intId;
+                }
                 var result = await _genericService.Delete(id);
                 return Ok(result.Message);
 
@@ -75,20 +84,53 @@ namespace shoppetApi.Controllers
             }
         }
 
-       
-
-       
-        [HttpPut("Update{id}")]
-
-        public virtual async Task<ActionResult<T>> Update(int id, [FromBody] TUpdate dto)
+        [HttpGet("GetById/{id}")]
+        public virtual async Task<ActionResult<T>> GetById(string id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
-                if (id <= 0) return BadRequest(MessageConstants.InvalidId);
+                if (!CheckValidUser(id))
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                object parsedId = id;
+                if (int.TryParse(id, out var intId))
+                {
+                    if(intId <= 0)
+                    {
+                        return BadRequest(MessageConstants.InvalidId);
+                    }
+                    parsedId = intId;
+                }
+                var result = await _genericService.GetById(parsedId);
+                if (result == null) return NotFound(MessageConstants.DataNotFound);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+
+        [HttpPut("Update/{id}")]
+        public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
+        {
+            try
+            {
+                if (!CheckValidUser(id))
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                object parsedId = id;
+                if (int.TryParse(id, out var intId))
+                {
+                    if (intId <= 0)
+                    {
+                        return BadRequest(MessageConstants.InvalidId);
+                    }
+                    parsedId = intId;
+                }
                 var data = await _genericService.GetById(id);
                 if (!data.Success) return NotFound(data.Message);
 
@@ -102,6 +144,16 @@ namespace shoppetApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
+        }
+
+        private bool CheckValidUser(string id)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim == null || userIdClaim != id)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

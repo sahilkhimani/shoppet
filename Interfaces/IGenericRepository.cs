@@ -3,9 +3,9 @@
     public interface IGenericRepository<T> where T : class
     {
         Task Add(T entity);
-        Task Update(int id, T entity);
-        Task Delete(int id);
-        Task<T> GetById(int id);
+        Task Update(object id, T entity);
+        Task Delete(object id);
+        Task<T> GetById(object id);
         Task<IEnumerable<T>> GetAll();
     }
 }

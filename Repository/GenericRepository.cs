@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using shoppetApi.Interfaces;
+using System;
 
 namespace shoppetApi.Repository
 {
@@ -19,7 +20,7 @@ namespace shoppetApi.Repository
            await _dbSet.AddAsync(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(object id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity != null) {
@@ -32,12 +33,12 @@ namespace shoppetApi.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> GetById(object id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task Update(int id, T entity)
+        public async Task Update(object id, T entity)
         {
             _dbSet.Update(entity);
         }

@@ -78,8 +78,29 @@ namespace shoppetApi.Controllers
            return await base.GetAll();
         }
 
-       
+        [Authorize]
+        [HttpGet("GetById/{id}")]
+        public override async Task<ActionResult<User>> GetById(string id)
+        {
+            return await base.GetById(id);
+        }
 
+        [Authorize]
+        [HttpDelete("Delete/{id}")]
+        public override async Task<ActionResult<User>> Delete(string id)
+        {
+            return await base.Delete(id);
+        }
 
+        [Authorize]
+        [HttpPut("Update/{id}")]
+        public override async Task<ActionResult<User>> Update(string id, [FromBody] UserUpdateDTO userUpdateDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return await base.Update(id, userUpdateDTO);
+        }
     }
 }

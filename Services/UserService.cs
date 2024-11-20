@@ -85,8 +85,6 @@ namespace shoppetApi.Services
 
             }
             return APIResponse<User>.CreateResponse(true, token, null);
-
-
         }
 
         public async Task<bool> EmailAlreadyExists(string email)

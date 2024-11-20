@@ -1,4 +1,5 @@
-﻿using PetShopApi.Models;
+﻿using NuGet.DependencyResolver;
+using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
@@ -32,10 +33,11 @@ namespace shoppetApi.Services
             }
         }
 
-        public async Task<APIResponse<T>> Delete(int id)
+        public async Task<APIResponse<T>> Delete(object id)
         {
             try
             {
+                if (id == null) return APIResponse<T>.CreateResponse(false, MessageConstants.NullId, null);
                 var result = await _genericRepository.GetById(id);
                 if (result == null)
                 {
@@ -67,16 +69,17 @@ namespace shoppetApi.Services
             }
         }
 
-        public async Task<APIResponse<T>> GetById(int id)
+        public async Task<APIResponse<T>> GetById(object id)
         {
             try
             {
+                if(id == null) return APIResponse<T>.CreateResponse(false, MessageConstants.NullId, null);
+               
                 var result = await _genericRepository.GetById(id);
-
+                
                 if (result == null)
                 {
                     return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
-
                 }
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "retrieved"), result);
             }
@@ -85,12 +88,14 @@ namespace shoppetApi.Services
                 return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "retrieving", ex.Message), null);
             }
 
-        }
+        }   
 
-        public async Task<APIResponse<T>> Update(int id, T entity)
+        public async Task<APIResponse<T>> Update(object id, T entity)
         {
             try
             {
+                if (id == null) return APIResponse<T>.CreateResponse(false, MessageConstants.NullId, null);
+
                 var data = await _genericRepository.GetById(id);
                 if (data == null)
                 {
@@ -99,8 +104,7 @@ namespace shoppetApi.Services
                 await _genericRepository.Update(id, entity);
                 await _unitOfWork.SaveAsync();
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "updated"), null);
-
-               
+   
             }
             catch (Exception ex)
             {
