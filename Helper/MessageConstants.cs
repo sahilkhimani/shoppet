@@ -9,6 +9,7 @@
         public const string AlreadyExistsMessage = "{0} already exists.";
         public const string ErrorOccuredMessage = "An unexpected error occurred: {0}.";
         public const string NotFoundMessage = "{0} not found.";
+        public const string InvalidId = "Id is Invalid";
     }
 }
 

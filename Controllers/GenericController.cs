@@ -50,7 +50,7 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                if (id <= 0) return BadRequest("Id is invalid");
+                if (id <= 0) return BadRequest(MessageConstants.InvalidId);
                 var result = await _genericService.Delete(id);
                 return Ok(result.Message);
 
@@ -74,21 +74,10 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-        [HttpGet("GetById/{id}")]
 
-        public virtual  async Task<ActionResult<T>> GetById(int id)
-        {
-            try
-            {
-                if (id <= 0) return BadRequest("Id is invalid");
-                var result = await _genericService.GetById(id);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
-            }
-        }
+       
+
+       
         [HttpPut("Update{id}")]
 
         public virtual async Task<ActionResult<T>> Update(int id, [FromBody] TUpdate dto)
@@ -99,7 +88,7 @@ namespace shoppetApi.Controllers
             }
             try
             {
-                if (id <= 0) return BadRequest("Id is invalid");
+                if (id <= 0) return BadRequest(MessageConstants.InvalidId);
                 var data = await _genericService.GetById(id);
                 if (!data.Success) return NotFound(data.Message);
 

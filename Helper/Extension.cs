@@ -51,31 +51,45 @@ namespace shoppetApi.Helper
 
         public static void JwtAuth(this IServiceCollection services, IConfiguration configuration)
         {
-       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-     .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = configuration["Jwt:Issuer"],
-            ValidAudience = configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
-        };
-    });
-            services.AddScoped<JwtTokenService>();
-        }
+            var Jwt = configuration.GetSection("Jwt");
 
-        public static void AuthPolicy(this IServiceCollection services)
-        {
-            services.AddAuthorization(options =>
+            services.AddScoped<JwtTokenService>();
+            services.AddAuthentication(opt =>
             {
-                options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("SellerPolicy", policy => policy.RequireRole("Seller"));
-                options.AddPolicy("BuyerPolicy", policy => policy.RequireRole("Buyer"));
-            });
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Jwt["Issuer"],
+                        ValidAudience = Jwt["Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Jwt["Key"]!))
+                    };
+                });
         }
     }
 }
+
+
+
+//services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            ValidIssuer = configuration["Jwt:Issuer"],
+//            ValidAudience = configuration["Jwt:Audience"],
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+//        };
+//    });

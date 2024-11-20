@@ -2,7 +2,7 @@
 
 namespace shoppetApi.Services
 {
-    public interface IGenericService<T> where T : class
+    public interface IGenericService<T> where T : class 
     {
         Task<APIResponse<T>> Add(T entity);
         Task<APIResponse<T>> Update(int id,T entity);

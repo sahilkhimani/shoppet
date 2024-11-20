@@ -21,8 +21,7 @@ namespace shoppetApi.DTO
         public string ConfirmPassword { get; set; }
         public string PhoneNumber { get; set; }
         
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Please Select the role")]
+        [Required(ErrorMessage ="Please Select the Role")]
         public string RoleId { get; set; }
     }
 }

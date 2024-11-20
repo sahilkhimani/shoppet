@@ -28,6 +28,7 @@ namespace shoppetApi.Services
 
         public async Task<APIResponse<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
         {
+            const string roleValue = "Admin";
             var user = _mapper.Map<User>(userRegistrationDTO);
 
             var email = await EmailAlreadyExists(userRegistrationDTO.UserEmail);
@@ -35,9 +36,8 @@ namespace shoppetApi.Services
             {
                 return APIResponse<User>.CreateResponse(false, MessageHelper.AlreadyExists(userRegistrationDTO.UserEmail), null);
             }
-
             var role = await _unitOfWork.Roles.GetRole(userRegistrationDTO.RoleId);
-            if (role == null)
+            if (role == null || role.Name == roleValue)
             {
                 return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound("Role"), null);
             }

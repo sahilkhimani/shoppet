@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
@@ -12,18 +14,19 @@ namespace shoppetApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-        public class UserController : ControllerBase{
+        public class UserController : GenericController<User, UserRegistrationDTO, UserUpdateDTO>
+        {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IGenericService<User> genericService, IMapper mapper, IUserService userService) : base(genericService, mapper)
         {
             _userService = userService;
             _mapper = mapper;
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<User>> Register([FromBody] UserRegistrationDTO userRegistrationDto)
+        public override async Task<ActionResult<User>> Add([FromBody] UserRegistrationDTO userRegistrationDto)
         {
          
             if (!ModelState.IsValid)
@@ -60,7 +63,7 @@ namespace shoppetApi.Controllers
             {
                 return BadRequest(result.Message);
             }
-            return Ok(result.Message);
+            return Ok(result);
             }
             catch (Exception ex)
             {
@@ -68,5 +71,15 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [Authorize(Roles ="Admin")]
+        [HttpGet("GetAll")]
+        public override async Task<ActionResult<IEnumerable<User>>> GetAll()
+        {
+           return await base.GetAll();
+        }
+
+       
+
+
     }
-    }
+}
