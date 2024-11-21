@@ -47,10 +47,6 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                if (!CheckValidUser(id))
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
                 object parsedId = id;
                 if (int.TryParse(id, out var intId))
                 {
@@ -89,10 +85,6 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                if (!CheckValidUser(id))
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
                 object parsedId = id;
                 if (int.TryParse(id, out var intId))
                 {
@@ -117,11 +109,7 @@ namespace shoppetApi.Controllers
         public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
         {
             try
-            {
-                if (!CheckValidUser(id))
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
+            { 
                 object parsedId = id;
                 if (int.TryParse(id, out var intId))
                 {
@@ -146,14 +134,5 @@ namespace shoppetApi.Controllers
             }
         }
 
-        private bool CheckValidUser(string id)
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userIdClaim == null || userIdClaim != id)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }

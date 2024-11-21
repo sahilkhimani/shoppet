@@ -1,11 +1,16 @@
 ﻿using AutoMapper;
+using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
+using shoppetApi.Interfaces;
+using shoppetApi.Migrations;
 using shoppetApi.MyUnitOfWork;
 using shoppetApi.Repository;
+using System.Security.Claims;
 
 namespace shoppetApi.Services
 {
@@ -16,7 +21,8 @@ namespace shoppetApi.Services
         private readonly SignInManager<User> _signInManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly JwtTokenService _jwtTokenService;
-        public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, SignInManager<User> signInManager , IMapper mapper, JwtTokenService jwtTokenService)
+        private readonly IHttpContextHelper _contextHelper;
+        public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, SignInManager<User> signInManager , IMapper mapper, JwtTokenService jwtTokenService, IHttpContextHelper contextHelper)
         {
 
             _mapper = mapper;
@@ -24,6 +30,7 @@ namespace shoppetApi.Services
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
             _jwtTokenService = jwtTokenService;
+            _contextHelper = contextHelper;
         }
 
         public async Task<APIResponse<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
@@ -50,10 +57,8 @@ namespace shoppetApi.Services
                 return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, "created"), null);
               
             }
-            else
-            {
-                return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
-            }
+            return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+     
         }
                 
         public async Task<APIResponse<User>> LoginUser(UserLoginDTO userLoginDTO)
@@ -74,7 +79,6 @@ namespace shoppetApi.Services
             if(roles.Count == 0)
             {
                 return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound("Role"), null);
-
             }
 
             var token = _jwtTokenService.GenerateJwtToken(user, roles);
@@ -87,6 +91,32 @@ namespace shoppetApi.Services
             return APIResponse<User>.CreateResponse(true, token, null);
         }
 
+        public async Task<APIResponse<User>> UpdateUser(string id, UserUpdateDTO userUpdateDTO)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(typeof(User).Name), null);
+            }
+            if (!userUpdateDTO.CurrentPassword.IsNullOrEmpty() && !userUpdateDTO.Password.IsNullOrEmpty())
+            {
+                var passwordUpdate = await _userManager.ChangePasswordAsync(user, userUpdateDTO.CurrentPassword, userUpdateDTO.Password);
+                if (!passwordUpdate.Succeeded)
+                {
+                    return APIResponse<User>.CreateResponse(false, passwordUpdate.Errors.First().Description, null);
+                }
+            }
+            user.UserName = userUpdateDTO.UserName;
+            user.PhoneNumber = userUpdateDTO.PhoneNumber;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, "Updated"), null);
+            }
+            return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+        }
+
         public async Task<bool> EmailAlreadyExists(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -97,7 +127,15 @@ namespace shoppetApi.Services
             return true;
         }
 
-
+        public bool ValidUser(string id)
+        {
+            var userIdClaim = _contextHelper.GetCurrentUserId();
+            if (userIdClaim == null || userIdClaim != id)
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }

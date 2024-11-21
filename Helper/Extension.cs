@@ -9,6 +9,7 @@ using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
 using shoppetApi.Repository;
 using shoppetApi.Services;
+using System.Security.Claims;
 using System.Text;
 
 namespace shoppetApi.Helper
@@ -19,6 +20,7 @@ namespace shoppetApi.Helper
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
@@ -76,20 +78,3 @@ namespace shoppetApi.Helper
         }
     }
 }
-
-
-
-//services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            ValidIssuer = configuration["Jwt:Issuer"],
-//            ValidAudience = configuration["Jwt:Audience"],
-//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
-//        };
-//    });

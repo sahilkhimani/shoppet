@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using shoppetApi.Helper;
 using shoppetApi.Services;
 using System.Configuration;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 
 namespace shoppetApi.Controllers
 {
@@ -58,7 +60,7 @@ namespace shoppetApi.Controllers
             }
             try
             {
-            var result = await _userService.LoginUser(userLoginDTO);
+                var result = await _userService.LoginUser(userLoginDTO);
             if (!result.Success)
             {
                 return BadRequest(result.Message);
@@ -75,21 +77,52 @@ namespace shoppetApi.Controllers
         [HttpGet("GetAll")]
         public override async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
-           return await base.GetAll();
+            try
+            {
+                return await base.GetAll();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
         }
 
         [Authorize]
         [HttpGet("GetById/{id}")]
         public override async Task<ActionResult<User>> GetById(string id)
         {
-            return await base.GetById(id);
+            try
+            {
+                var result = _userService.ValidUser(id);
+                if (!result && !User.IsInRole("Admin"))
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                return await base.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
         }
 
         [Authorize]
         [HttpDelete("Delete/{id}")]
         public override async Task<ActionResult<User>> Delete(string id)
         {
-            return await base.Delete(id);
+            var result = _userService.ValidUser(id);
+            try
+            {
+                if (!result && !User.IsInRole("Admin"))
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                return await base.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
         }
 
         [Authorize]
@@ -100,7 +133,25 @@ namespace shoppetApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            return await base.Update(id, userUpdateDTO);
+            try
+            {
+                var result = _userService.ValidUser(id);
+                if (!result)
+                {
+                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                }
+                var response = await _userService.UpdateUser(id, userUpdateDTO);
+                if (!response.Success)
+                {
+                    return BadRequest(response.Message);
+                }
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
         }
+
     }
 }

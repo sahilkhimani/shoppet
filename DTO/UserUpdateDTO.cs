@@ -6,7 +6,10 @@ namespace shoppetApi.DTO
     {
         [Required]
         public string UserName { get; set; }
-        
+
+        [Required]
+        public string CurrentPassword { get; set; }
+
         [Required]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
             ErrorMessage = "Password must be at least 8 characters long, contain at least one uppercase letter, and one number and one special character.")]
@@ -16,7 +19,7 @@ namespace shoppetApi.DTO
         [Compare("Password", ErrorMessage = "Password do not match")]
         public string ConfirmPassword { get; set; }
 
-         public string PhoneNo   { get; set; }
+         public string PhoneNumber { get; set; }
 
       
     }
