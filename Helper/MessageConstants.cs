@@ -14,6 +14,7 @@
         public const string DataNotFound = "Entity not found";
         public const string UnAuthenticatedUser = "User is not authenticated";
         public const string UnAuthorizedUser = "User is not authorized to access";
+        public const string AlredyExistsSpecies = "Species already exists";
     }
 }
 

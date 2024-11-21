@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using PetShopApi.Models;
-using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Services;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
 
 namespace shoppetApi.Controllers
 {
@@ -25,6 +20,10 @@ namespace shoppetApi.Controllers
         [HttpPost("Create")]
         public virtual async Task<ActionResult<T>> Add([FromBody] TAdd dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 var data = _mapper.Map<T>(dto);
@@ -56,7 +55,7 @@ namespace shoppetApi.Controllers
                     }
                     parsedId = intId;
                 }
-                var result = await _genericService.Delete(id);
+                var result = await _genericService.Delete(parsedId);
                 return Ok(result.Message);
 
             }
@@ -108,6 +107,10 @@ namespace shoppetApi.Controllers
         [HttpPut("Update/{id}")]
         public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             { 
                 object parsedId = id;
@@ -119,13 +122,13 @@ namespace shoppetApi.Controllers
                     }
                     parsedId = intId;
                 }
-                var data = await _genericService.GetById(id);
+                var data = await _genericService.GetById(parsedId);
                 if (!data.Success) return NotFound(data.Message);
 
                 var updatedData = _mapper.Map(dto, data.Data);
                 var updated = _mapper.Map<T>(updatedData);
 
-                var result = await _genericService.Update(id, updated);
+                var result = await _genericService.Update(parsedId, updated);
                 return Ok(result.Message);
             }
             catch (Exception ex)

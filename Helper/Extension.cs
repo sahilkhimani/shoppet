@@ -17,10 +17,10 @@ namespace shoppetApi.Helper
     public static class Extension
     {
         public static void RegisterServices(this IServiceCollection services) { 
+            services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
             services.AddScoped<IUserService, UserService>();
-            services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

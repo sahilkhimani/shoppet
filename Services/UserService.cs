@@ -66,7 +66,7 @@ namespace shoppetApi.Services
             var user = await _userManager.FindByEmailAsync(userLoginDTO.UserEmail);
             if (user == null)
             {
-                return APIResponse<User>.CreateResponse(false, MessageHelper.Message("Invalid Credentials"), null);
+                return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(typeof(User).Name), null);
             }
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, userLoginDTO.Password);

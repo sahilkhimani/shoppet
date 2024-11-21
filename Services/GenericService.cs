@@ -74,7 +74,6 @@ namespace shoppetApi.Services
             try
             {
                 if(id == null) return APIResponse<T>.CreateResponse(false, MessageConstants.NullId, null);
-               
                 var result = await _genericRepository.GetById(id);
                 
                 if (result == null)
@@ -95,7 +94,6 @@ namespace shoppetApi.Services
             try
             {
                 if (id == null) return APIResponse<T>.CreateResponse(false, MessageConstants.NullId, null);
-
                 var data = await _genericRepository.GetById(id);
                 if (data == null)
                 {
