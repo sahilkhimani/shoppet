@@ -13,8 +13,33 @@ namespace shoppetApi.Controllers
     [ApiController]
     public class SpeciesController : GenericController<Species, SpeciesDTO, SpeciesDTO>
     {
-        public SpeciesController(IGenericService<Species> genericService, IMapper mapper) : base(genericService, mapper)
+        private readonly ISpeciesService _speciesService;
+        public SpeciesController(IGenericService<Species> genericService, IMapper mapper, ISpeciesService speciesService) : base(genericService, mapper)
         {
+            _speciesService = speciesService;
+        }
+
+
+        [HttpPost("Create")]
+        public override async Task<ActionResult<Species>> Add([FromBody] SpeciesDTO speciesDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _speciesService.AlreadyExists(speciesDTO.SpeciesName);
+                if (result)
+                {
+                    return Conflict(MessageConstants.AlredyExistsSpecies);
+                }
+                return await base.Add(speciesDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
         }
 
         [Authorize(Roles ="Admin")]
@@ -31,27 +56,27 @@ namespace shoppetApi.Controllers
             }
         }
 
-        //[HttpPost("Create")]
-        //public override async Task<ActionResult<Species>> Add([FromBody] SpeciesDTO speciesDTO)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    try
-        //    {
-        //        var result = await _speciesService.AlreadyExists(speciesDTO.SpeciesName);
-        //        if (result)
-        //        {
-        //            return Conflict(MessageConstants.AlredyExistsSpecies);
-        //        }
-        //        return await base.Add(speciesDTO);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
-        //    }
-        //}
+        [HttpPut("Update/{id}")]
+        public override async Task<ActionResult<Species>> Update(string id, [FromBody] SpeciesDTO speciesDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _speciesService.AlreadyExists(speciesDTO.SpeciesName);
+                if (result)
+                {
+                    return Conflict(MessageConstants.AlredyExistsSpecies);
+                }
+                return await base.Update(id, speciesDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
 
-}
+        }
+    }
 }

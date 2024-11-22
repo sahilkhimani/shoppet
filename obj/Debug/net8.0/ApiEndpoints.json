@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Species, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.SpeciesDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.SpeciesDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "shoppetApi.Controllers.SpeciesController",
     "Method": "Add",
     "RelativePath": "api/Species/Create",
     "HttpMethod": "POST",
@@ -8,7 +8,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
+        "Name": "speciesDTO",
         "Type": "shoppetApi.DTO.SpeciesDTO",
         "IsRequired": true
       }
@@ -98,7 +98,7 @@
     ]
   },
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Species, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.SpeciesDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.SpeciesDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "shoppetApi.Controllers.SpeciesController",
     "Method": "Update",
     "RelativePath": "api/Species/Update/{id}",
     "HttpMethod": "PUT",
@@ -111,7 +111,7 @@
         "IsRequired": true
       },
       {
-        "Name": "dto",
+        "Name": "speciesDTO",
         "Type": "shoppetApi.DTO.SpeciesDTO",
         "IsRequired": true
       }

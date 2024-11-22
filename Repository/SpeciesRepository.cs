@@ -1,4 +1,5 @@
-﻿using PetShopApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopApi.Data;
 using PetShopApi.Models;
 using shoppetApi.Interfaces;
 
@@ -14,11 +15,7 @@ namespace shoppetApi.Repository
 
         public async Task<bool> SpeciesAlreadyExists(string name)
         {
-            var existingSpecies = await _context.FindAsync<Species>(name);
-            if (existingSpecies!=null) { 
-                return true;
-            }
-            return false;
+            return await _context.Species.AnyAsync(x => x.SpeciesName.ToLower() == name.ToLower());
         }
     }
 }

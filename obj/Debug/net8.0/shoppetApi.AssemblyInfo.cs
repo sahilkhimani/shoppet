@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("shoppetApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fbf32f7453b86e2e6c9fcb0827343adfbd550f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0c7d8f13df69c9c6c26a2c614d6c288d06c9f1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("shoppetApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("shoppetApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

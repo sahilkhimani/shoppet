@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "D:\\C#\\shoppet-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\helper\\extension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\extension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\speciescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\speciescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Extension.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Helper\\Extension.cs",
-              "RelativeDocumentMoniker": "Helper\\Extension.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Helper\\Extension.cs",
-              "RelativeToolTip": "Helper\\Extension.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Title": "GenericController.cs",
+              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GenericController.cs",
+              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
+              "RelativeToolTip": "Controllers\\GenericController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAcwG4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T16:18:21.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T16:12:19.057Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SpeciesController.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\SpeciesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SpeciesController.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\SpeciesController.cs",
-              "RelativeToolTip": "Controllers\\SpeciesController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAmwA8AAABYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T14:03:21.289Z",
+              "WhenOpened": "2024-11-22T05:25:34.594Z",
               "EditorCaption": ""
             }
           ]

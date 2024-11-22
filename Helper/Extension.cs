@@ -21,6 +21,7 @@ namespace shoppetApi.Helper
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISpeciesService, SpeciesService>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)

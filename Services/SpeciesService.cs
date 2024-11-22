@@ -9,15 +9,15 @@ namespace shoppetApi.Services
 {
     public class SpeciesService : ISpeciesService
     {
-        private readonly ISpeciesRepository _speciesRepository;
-        public SpeciesService(ISpeciesRepository speciesRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public SpeciesService(IUnitOfWork unitOfWork)
         {
-            _speciesRepository = speciesRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<bool> AlreadyExists(string name)
         {
-            return await _speciesRepository.SpeciesAlreadyExists(name);
+            return await _unitOfWork.Species.SpeciesAlreadyExists(name);
         }
     }
 }
