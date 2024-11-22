@@ -12,6 +12,8 @@ namespace shoppetApi.Helper
                  .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
 
             CreateMap<SpeciesDTO, Species>();
+
+            CreateMap<BreedDTO, Breed>();
        }
 
     }

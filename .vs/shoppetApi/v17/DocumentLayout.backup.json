@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\C#\\shoppet-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\breedcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\breedcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\services\\breedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\breedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\repository\\breedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:repository\\breedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\interfaces\\ibreedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:interfaces\\ibreedrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GenericController.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GenericController.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
-              "RelativeToolTip": "Controllers\\GenericController.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAcwG4AAAANAAAAAAAAAA==",
+              "Title": "BreedController.cs",
+              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\BreedController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BreedController.cs",
+              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\BreedController.cs",
+              "RelativeToolTip": "Controllers\\BreedController.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAADwv10AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T05:25:34.594Z",
+              "WhenOpened": "2024-11-22T05:48:49.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BreedService.cs",
+              "DocumentMoniker": "D:\\C#\\shoppet-main\\Services\\BreedService.cs",
+              "RelativeDocumentMoniker": "Services\\BreedService.cs",
+              "ToolTip": "D:\\C#\\shoppet-main\\Services\\BreedService.cs",
+              "RelativeToolTip": "Services\\BreedService.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAowB0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T10:17:27.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IBreedRepository.cs",
+              "DocumentMoniker": "D:\\C#\\shoppet-main\\Interfaces\\IBreedRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IBreedRepository.cs",
+              "ToolTip": "D:\\C#\\shoppet-main\\Interfaces\\IBreedRepository.cs",
+              "RelativeToolTip": "Interfaces\\IBreedRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T10:17:05.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BreedRepository.cs",
+              "DocumentMoniker": "D:\\C#\\shoppet-main\\Repository\\BreedRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\BreedRepository.cs",
+              "ToolTip": "D:\\C#\\shoppet-main\\Repository\\BreedRepository.cs",
+              "RelativeToolTip": "Repository\\BreedRepository.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowBwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T10:04:31.322Z",
               "EditorCaption": ""
             }
           ]
