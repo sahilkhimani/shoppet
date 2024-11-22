@@ -21,7 +21,11 @@ namespace shoppetApi.Helper
 
         public const string AlredyExistsSpecies = "Species already exists";
         public const string NotExistsSpecies = "Species Not Exists";
+
         public const string AlreadyExistsBreed = "Breed Already Exists";
+        public const string NotExistsBreed = "Breed Not Exists";
+
+        public const string WrongGender = "Please Select the right gender";
     }
 }
 

@@ -19,6 +19,11 @@ namespace shoppetApi.Repository
             return await _context.Breeds.AnyAsync(x=> x.BreedName.ToLower() == name.ToLower());
         }
 
+        public async Task<bool> BreedIdAlreadyExists(int id)
+        {
+            return await _context.Breeds.AnyAsync(x => x.BreedId == id);
+        }
+
         public async Task<bool> SpeciesIdExists(int id)
         {
             return await _context.Species.AnyAsync(x=>x.SpeciesId == id);

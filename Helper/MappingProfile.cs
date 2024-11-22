@@ -14,6 +14,8 @@ namespace shoppetApi.Helper
             CreateMap<SpeciesDTO, Species>();
 
             CreateMap<BreedDTO, Breed>();
+
+            CreateMap<PetDTO, Pet>();
        }
 
     }
