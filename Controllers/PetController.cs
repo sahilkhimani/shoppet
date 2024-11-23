@@ -48,6 +48,7 @@ namespace shoppetApi.Controllers
 
                 var data = _mapper.Map<Pet>(petDTO);
                 data.OwnerId = checkData;
+                data.PetName = _genericService.ApplyTitleCase(data.PetName);
                                 
                 var result = await _genericService.Add(data);
                 if (!result.Success)
@@ -69,11 +70,41 @@ namespace shoppetApi.Controllers
             try
             {
                 var ownPet = await _petService.CheckOwnPets(id);
-                if (!ownPet)
+                if (ownPet == MessageConstants.InvalidId || ownPet == MessageConstants.DataNotFound)
                 {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                    return BadRequest(ownPet);
                 }
+                if (ownPet == MessageConstants.UnAuthorizedUser) return Unauthorized(ownPet);
                 return await base.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpPut("Update/{id}")]
+        public override async Task<ActionResult<Pet>> Update(string id, [FromBody] PetDTO petDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var checkData = await _petService.CheckUser(petDTO);
+                if (checkData == MessageConstants.NoUser || checkData == MessageConstants.NotExistsBreed
+                    || checkData == MessageConstants.WrongGender)
+                {
+                    return BadRequest(checkData);
+                }
+                var ownPet = await _petService.CheckOwnPets(id);
+                if (ownPet == MessageConstants.InvalidId || ownPet == MessageConstants.DataNotFound)
+                {
+                    return BadRequest(ownPet);
+                }
+                if (ownPet == MessageConstants.UnAuthorizedUser) return Unauthorized(ownPet);
+                return await base.Update(id, petDTO);
             }
             catch (Exception ex)
             {

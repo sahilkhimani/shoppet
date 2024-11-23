@@ -14,9 +14,11 @@ namespace shoppetApi.Controllers
     public class BreedController : GenericController<Breed, BreedDTO, BreedDTO>
     {
         private readonly IBreedService _breedService;
+        private readonly IGenericService<Breed> _genericService;
         public BreedController(IGenericService<Breed> genericService, IMapper mapper, IBreedService breedService) : base(genericService, mapper)
         {
             _breedService = breedService;
+            _genericService = genericService;
         }
 
         [HttpPost("Create")]
@@ -38,6 +40,7 @@ namespace shoppetApi.Controllers
                 {
                     return Conflict(MessageConstants.AlreadyExistsBreed);
                 }
+                breedDTO.BreedName = _genericService.ApplyTitleCase(breedDTO.BreedName);
                 return await base.Add(breedDTO);
             }
             catch (Exception ex)

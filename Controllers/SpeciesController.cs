@@ -6,6 +6,7 @@ using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Services;
+using System.Globalization;
 
 namespace shoppetApi.Controllers
 {
@@ -14,9 +15,11 @@ namespace shoppetApi.Controllers
     public class SpeciesController : GenericController<Species, SpeciesDTO, SpeciesDTO>
     {
         private readonly ISpeciesService _speciesService;
+        private readonly IGenericService<Species> _genericService;
         public SpeciesController(IGenericService<Species> genericService, IMapper mapper, ISpeciesService speciesService) : base(genericService, mapper)
         {
             _speciesService = speciesService;
+            _genericService = genericService;
         }
 
 
@@ -34,6 +37,7 @@ namespace shoppetApi.Controllers
                 {
                     return Conflict(MessageConstants.AlredyExistsSpecies);
                 }
+                speciesDTO.SpeciesName =  _genericService.ApplyTitleCase(speciesDTO.SpeciesName);
                 return await base.Add(speciesDTO);
             }
             catch (Exception ex)
