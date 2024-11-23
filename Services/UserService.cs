@@ -7,7 +7,6 @@ using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
-using shoppetApi.Migrations;
 using shoppetApi.MyUnitOfWork;
 using shoppetApi.Repository;
 using System.Security.Claims;

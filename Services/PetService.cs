@@ -1,4 +1,5 @@
-﻿using PetShopApi.Models;
+﻿using Microsoft.Identity.Client;
+using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
@@ -25,25 +26,29 @@ namespace shoppetApi.Services
             return await _breedRepository.BreedIdAlreadyExists(id);
         }
 
-        public async Task<bool> CheckOwnPets(string id)
+        public async Task<string> CheckOwnPets(string id)
         {
             int parsedId = 0;
             if (int.TryParse(id, out var intId))
             {
                 if (intId <= 0)
                 {
-                    return false;
+                    return MessageConstants.InvalidId;
                 }
                 parsedId = intId;
             }
-            var ownerId = await _petRepository.GetOwnerOnPetId(parsedId);
-            var currentUserId = _httpContextHelper.GetCurrentUserId();
-            if(ownerId == MessageConstants.InvalidId || ownerId == MessageConstants.DataNotFound
-                || ownerId != currentUserId)
+            var existId = await _petRepository.GetById(parsedId);
+            if(existId == null)
             {
-                return false;
+                return MessageConstants.DataNotFound;
             }
-            return true;
+            var ownerId = _petRepository.GetOwnerOnPetId(parsedId);
+            var currentUserId = _httpContextHelper.GetCurrentUserId();
+            if(ownerId == null || ownerId != currentUserId)
+            {
+                return MessageConstants.UnAuthorizedUser;
+            }
+            return ownerId;
         }
 
         public async Task<string> CheckUser(PetDTO petDTO)
@@ -53,7 +58,7 @@ namespace shoppetApi.Services
             var petGender = petDTO.PetGender.ToLower();
             if(userId == null)
             {
-                return MessageConstants.UnAuthenticatedUser;
+                return MessageConstants.NoUser;
             }
             if (!breedExists)
             {

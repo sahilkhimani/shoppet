@@ -4,6 +4,7 @@ using shoppetApi.DTO;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
+using System.Globalization;
 
 namespace shoppetApi.Services
 {
@@ -108,6 +109,11 @@ namespace shoppetApi.Services
             {
                 return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "updating", ex.Message), null);
             }
+        }
+        public string ApplyTitleCase(string name)
+        {
+            TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+            return ti.ToTitleCase(name);
         }
     }
 }

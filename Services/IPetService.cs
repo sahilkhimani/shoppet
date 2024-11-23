@@ -9,7 +9,7 @@ namespace shoppetApi.Services
     {
         public Task<bool> BreedIdAlreadyExists(int id);
         public Task<string> CheckUser(PetDTO petDTO);
-        public Task<bool> CheckOwnPets(string id);
+        public Task<string> CheckOwnPets(string id);
 
     }
 

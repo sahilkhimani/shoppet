@@ -9,5 +9,7 @@ namespace shoppetApi.Services
         Task<APIResponse<T>> Delete(object id);
         Task<APIResponse<T>> GetById(object id);
         Task<APIResponse<IEnumerable<T>>> GetAll();
+        public string ApplyTitleCase(string name);
+
     }
 }
