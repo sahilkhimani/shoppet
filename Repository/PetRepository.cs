@@ -13,20 +13,13 @@ namespace shoppetApi.Repository
             _context = context;
         }
 
-        public async Task<string> GetOwnerOnPetId(int id)
+        public string GetOwnerOnPetId(int id)
         {
-            if(id <= 0)
-            {
-                return MessageConstants.InvalidId;
-            }
-            var ownerId = _context.Pets
+            return _context.Pets
                 .Where(x => x.PetId == id)
                 .Select(x => x.OwnerId)
                 .First();
-            if (ownerId == null) {
-                return MessageConstants.DataNotFound;
-            }
-            return ownerId;
         }
+
     }
 }
