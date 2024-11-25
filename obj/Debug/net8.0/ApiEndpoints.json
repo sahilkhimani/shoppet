@@ -243,7 +243,76 @@
     ]
   },
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Pet, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.PetDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.PetDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "shoppetApi.Controllers.PetController",
+    "Method": "GetPetsByAge",
+    "RelativePath": "api/Pet/GetPetsByAge/{age}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "age",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.PetController",
+    "Method": "GetPetsByAgeRange",
+    "RelativePath": "api/Pet/GetPetsByAgeRange",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "minAge",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxAge",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.PetController",
+    "Method": "GetPetsByBreedId",
+    "RelativePath": "api/Pet/GetPetsByBreedId/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.PetController",
+    "Method": "GetPetsByGender",
+    "RelativePath": "api/Pet/GetPetsByGender/{gender}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.PetController",
     "Method": "Update",
     "RelativePath": "api/Pet/Update/{id}",
     "HttpMethod": "PUT",
@@ -256,7 +325,7 @@
         "IsRequired": true
       },
       {
-        "Name": "dto",
+        "Name": "petDTO",
         "Type": "shoppetApi.DTO.PetDTO",
         "IsRequired": true
       }

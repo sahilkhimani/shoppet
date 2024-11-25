@@ -11,6 +11,13 @@ namespace shoppetApi.Controllers
     {
         private readonly IGenericService<T> _genericService;
         private readonly IMapper _mapper;
+
+        public GenericController(IMapper mapper, IGenericService<T> genericService)
+        {
+            _mapper = mapper;
+            _genericService = genericService;
+        }
+
         public GenericController(IGenericService<T> genericService, IMapper mapper)
         {
             _genericService = genericService;

@@ -22,10 +22,9 @@ namespace shoppetApi.Controllers
         private readonly IGenericService<Pet> _genericService;
         private readonly IPetService _petService;
 
-        public PetController(IGenericService<Pet> genericService, IMapper mapper,
-            IPetService petService) : base(genericService, mapper)
+        public PetController(IMapper mapper, IGenericService<Pet> genericService, IPetService petService) : base(mapper, genericService)
         {
-            _mapper = mapper;
+            _mapper = mapper;   
             _genericService = genericService;
             _petService = petService;
         }
@@ -49,7 +48,7 @@ namespace shoppetApi.Controllers
                 var data = _mapper.Map<Pet>(petDTO);
                 data.OwnerId = checkData;
                 data.PetName = _genericService.ApplyTitleCase(data.PetName);
-                                
+
                 var result = await _genericService.Add(data);
                 if (!result.Success)
                 {
@@ -105,6 +104,81 @@ namespace shoppetApi.Controllers
                 }
                 if (ownPet == MessageConstants.UnAuthorizedUser) return Unauthorized(ownPet);
                 return await base.Update(id, petDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpGet("GetPetsByBreedId/{id}")]
+        public async Task<ActionResult> GetPetsByBreedId(int id)
+        {
+            try
+            {
+                var result = await _petService.GetPetsByBreedId(id);
+                if (!result.Success) return NotFound(result.Message);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpGet("GetPetsByAge/{age}")]
+        public async Task<ActionResult> GetPetsByAge(int age)
+        {
+            try
+            {
+                var result = await _petService.GetPetsByAge(age);
+                if (!result.Success) return NotFound(result.Message);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpGet("GetPetsByAgeRange")]
+        public async Task<ActionResult> GetPetsByAgeRange(int minAge, int maxAge)
+        {
+            try
+            {
+                var result = await _petService.GetPetsByAgeRange(minAge, maxAge);
+                if (!result.Success) return NotFound(result.Message);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpGet("GetPetsByGender/{gender}")]
+        public async Task<ActionResult> GetPetsByGender(string gender)
+        {
+            try
+            {
+                var result = await _petService.GetPetsByGender(gender);
+                if (!result.Success) return NotFound(result.Message);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
+
+        [HttpGet("GetYourPets")]
+        public async Task<ActionResult> GetYourPets()
+        {
+            try
+            {
+                var result = await _petService.GetYourPets();
+                if (!result.Success) return NotFound(result.Message);
+                return Ok(result);
             }
             catch (Exception ex)
             {

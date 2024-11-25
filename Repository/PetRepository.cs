@@ -1,4 +1,5 @@
-﻿using PetShopApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopApi.Data;
 using PetShopApi.Models;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
@@ -21,5 +22,44 @@ namespace shoppetApi.Repository
                 .First();
         }
 
+        public async Task<IEnumerable<Pet>> GetPetsByAge(int age)
+        {
+            return await _context.Pets
+                .AsNoTracking()
+                .Where(x => x.PetAge == age)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Pet>> GetPetsByAgeRange(int minAge, int maxAge)
+        {
+            return await _context.Pets
+                .AsNoTracking()
+                .Where(x=> x.PetAge >= minAge && x.PetAge <= maxAge)
+                .ToListAsync(); 
+        }
+
+        public async Task<IEnumerable<Pet>> GetPetsByBreedId(int id)
+        {
+            return await _context.Pets
+                .AsNoTracking()
+                .Where(x => x.BreedId == id)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Pet>> GetPetsByGender(string gender)
+        {
+            return await _context.Pets
+                .AsNoTracking()
+                .Where(x => x.PetGender == gender)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Pet>> GetYourPets(string id)
+        {
+            return await _context.Pets
+                .AsNoTracking()
+                .Where(x => x.OwnerId ==  id)
+                .ToListAsync();
+        }
     }
 }
