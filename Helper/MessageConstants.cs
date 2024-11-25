@@ -27,6 +27,8 @@ namespace shoppetApi.Helper
         public const string NotExistsBreed = "Breed Not Exists";
 
         public const string WrongGender = "Please Select the right gender";
+
+        public const string PetNotExists = "Pet Not Exists";
     }
 }
 

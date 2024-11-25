@@ -16,9 +16,7 @@ namespace shoppetApi.Services
         public GenericService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
             _genericRepository = _unitOfWork.GenericRepository<T>();
-      
         }
 
         public async Task<APIResponse<T>> Add(T entity)
