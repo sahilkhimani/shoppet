@@ -53,7 +53,7 @@ namespace shoppetApi.Services
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, role.Name);
-                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, "created"), null);
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, MessageConstants.createdMessage), null);
               
             }
             return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
@@ -111,7 +111,7 @@ namespace shoppetApi.Services
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, "Updated"), null);
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, MessageConstants.updatedMessage), null);
             }
             return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
         }

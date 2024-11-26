@@ -4,6 +4,18 @@ namespace shoppetApi.Helper
 {
     public static class MessageConstants
     {
+        public const string createdMessage = "created";
+        public const string creatingMessage = "creating";
+        public const string fetchedMessage = "fetched";
+        public const string fetchingMessage = "fetching";
+        public const string retrievedMessage = "retrieved";
+        public const string retrievingMessage = "retrieving";
+        public const string updatedMessage = "updated";
+        public const string updatingMessage = "updating";
+        public const string deletedMessage = "deleted";
+        public const string deletingMessage = "deleting";
+
+
         public const string SuccessMessage = "{0} has been successfully {1}.";
         public const string FailureMessage = "An error occurred while {1} the {0}.";
         public const string ExceptionMessage = "An exception occurred while {1} the {0}: {2}.";
@@ -29,6 +41,11 @@ namespace shoppetApi.Helper
         public const string WrongGender = "Please Select the right gender";
 
         public const string PetNotExists = "Pet Not Exists";
+
+        public const string NoOrderFoundMessage = "No Orders Yet";
+        public const string InvalidOperationMessage = "Invalid Operation Performed";
+        public const string OrderAlreadyCancelledMessage = "Order is already cancelled";
+        public const string AlreadyStatusUpdated = "Order is already {0}";
     }
 }
 

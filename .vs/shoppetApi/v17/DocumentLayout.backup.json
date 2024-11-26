@@ -3,40 +3,12 @@
   "WorkspaceRootPath": "D:\\C#\\shoppet-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\repository\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:repository\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\dto\\orderstatusenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:dto\\orderstatusenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\genericcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\shoppet-main\\services\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,118 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAB3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T16:17:52.062Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OrderStatusEnum.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\DTO\\OrderStatusEnum.cs",
-              "RelativeDocumentMoniker": "DTO\\OrderStatusEnum.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\DTO\\OrderStatusEnum.cs",
-              "RelativeToolTip": "DTO\\OrderStatusEnum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T16:08:18.809Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "OrderRepository.cs",
               "DocumentMoniker": "D:\\C#\\shoppet-main\\Repository\\OrderRepository.cs",
               "RelativeDocumentMoniker": "Repository\\OrderRepository.cs",
               "ToolTip": "D:\\C#\\shoppet-main\\Repository\\OrderRepository.cs",
               "RelativeToolTip": "Repository\\OrderRepository.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowB4AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:59:04.53Z",
+              "WhenOpened": "2024-11-26T12:47:04.001Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IOrderRepository.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Interfaces\\IOrderRepository.cs",
-              "RelativeDocumentMoniker": "Interfaces\\IOrderRepository.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Interfaces\\IOrderRepository.cs",
-              "RelativeToolTip": "Interfaces\\IOrderRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:57:13.984Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GenericService.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Services\\GenericService.cs",
-              "RelativeDocumentMoniker": "Services\\GenericService.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Services\\GenericService.cs",
-              "RelativeToolTip": "Services\\GenericService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwBYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:35:01.055Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "OrderController.cs",
               "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
               "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\OrderController.cs",
               "RelativeToolTip": "Controllers\\OrderController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAtwCMAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:33:44.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Services\\OrderService.cs",
-              "RelativeDocumentMoniker": "Services\\OrderService.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Services\\OrderService.cs",
-              "RelativeToolTip": "Services\\OrderService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAD4vycAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:12:38.023Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IOrderService.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Services\\IOrderService.cs",
-              "RelativeDocumentMoniker": "Services\\IOrderService.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Services\\IOrderService.cs",
-              "RelativeToolTip": "Services\\IOrderService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:11:42.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GenericController.cs",
-              "DocumentMoniker": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GenericController.cs",
-              "ToolTip": "D:\\C#\\shoppet-main\\Controllers\\GenericController.cs",
-              "RelativeToolTip": "Controllers\\GenericController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAowDAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T15:09:25.927Z",
+              "WhenOpened": "2024-11-26T12:34:36.676Z",
               "EditorCaption": ""
             }
           ]

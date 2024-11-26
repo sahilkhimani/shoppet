@@ -7,5 +7,11 @@ namespace shoppetApi.Services
     public interface IOrderService
     {
         public Task<APIResponse<Order>> CreateOrder(AddOrderDTO addOrderDTO);
+        public Task<APIResponse<IEnumerable<Order>>> GetMyOrders();
+        public Task<APIResponse<IEnumerable<Order>>> GetSellerOrderList();
+        public Task<APIResponse<Order>> GetOrderById(string id);
+        public Task<APIResponse<Order>> CancelOrder(string id, UpdateOrderStatusDTO updateOrderDTO);
+        public Task<APIResponse<Order>> UpdateOrderStatus(int id, UpdateOrderStatusDTO updateOrderDTO);
+       
     }
 }

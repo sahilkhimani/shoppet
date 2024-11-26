@@ -41,5 +41,10 @@
         {
             return message;
         }
+
+        public static string AlreadyStatusUpdated(string field)
+        {
+            return string.Format(MessageConstants.AlreadyStatusUpdated, field);
+        }
     }
 }

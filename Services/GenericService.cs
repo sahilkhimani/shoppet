@@ -25,10 +25,10 @@ namespace shoppetApi.Services
             {
                 await _genericRepository.Add(entity);
                 await _unitOfWork.SaveAsync();
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "created"), entity);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.createdMessage), entity);
             }
             catch (Exception ex) {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "creating", ex.Message), null);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.creatingMessage, ex.Message), null);
             }
         }
 
@@ -44,10 +44,10 @@ namespace shoppetApi.Services
                 }
                 await _genericRepository.Delete(id);
                 await _unitOfWork.SaveAsync();
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "deleted"), null);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.deletedMessage), null);
             }
             catch (Exception ex) {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "deleting", ex.Message), null);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.deletingMessage, ex.Message), null);
             }
         }
 
@@ -60,11 +60,11 @@ namespace shoppetApi.Services
                 {
                     return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
-                return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "fetched"), result);
+                return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.fetchedMessage), result);
             }
             catch (Exception ex)
             {
-                return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "fetching", ex.Message), null);
+                return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.fetchingMessage, ex.Message), null);
             }
         }
 
@@ -79,11 +79,11 @@ namespace shoppetApi.Services
                 {
                     return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 }
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "retrieved"), result);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.retrievedMessage), result);
             }
             catch (Exception ex)
             {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "retrieving", ex.Message), null);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.retrievingMessage, ex.Message), null);
             }
 
         }   
@@ -100,12 +100,12 @@ namespace shoppetApi.Services
                 }
                 await _genericRepository.Update(id, entity);
                 await _unitOfWork.SaveAsync();
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, "updated"), null);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.updatedMessage), null);
    
             }
             catch (Exception ex)
             {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, "updating", ex.Message), null);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.updatingMessage, ex.Message), null);
             }
         }
         public string ApplyTitleCase(string name)

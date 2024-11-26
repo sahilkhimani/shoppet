@@ -34,7 +34,7 @@ namespace shoppetApi.Services
             {
                 return APIResponse<IEnumerable<Breed>>.CreateResponse(false, MessageHelper.NotFound(typeof(Breed).Name), null);
             }
-            return APIResponse<IEnumerable<Breed>>.CreateResponse(true, MessageHelper.Success(typeof(Breed).Name, "fetched"), result);
+            return APIResponse<IEnumerable<Breed>>.CreateResponse(true, MessageHelper.Success(typeof(Breed).Name, MessageConstants.fetchedMessage), result);
  
         }
     }

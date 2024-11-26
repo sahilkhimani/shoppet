@@ -146,6 +146,37 @@
   },
   {
     "ContainingType": "shoppetApi.Controllers.OrderController",
+    "Method": "Update",
+    "RelativePath": "api/Order/CancelOrder/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateOrderDTO",
+        "Type": "shoppetApi.DTO.UpdateOrderStatusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PetShopApi.Models.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.OrderController",
     "Method": "Add",
     "RelativePath": "api/Order/CreateOrder",
     "HttpMethod": "POST",
@@ -171,7 +202,7 @@
     ]
   },
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.AddOrderDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.UpdateOrderStatusDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "shoppetApi.Controllers.OrderController",
     "Method": "Delete",
     "RelativePath": "api/Order/Delete/{id}",
     "HttpMethod": "DELETE",
@@ -197,27 +228,7 @@
     ]
   },
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.AddOrderDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.UpdateOrderStatusDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-    "Method": "GetAll",
-    "RelativePath": "api/Order/GetAll",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.AddOrderDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.UpdateOrderStatusDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "shoppetApi.Controllers.OrderController",
     "Method": "GetById",
     "RelativePath": "api/Order/GetById/{id}",
     "HttpMethod": "GET",
@@ -243,20 +254,60 @@
     ]
   },
   {
-    "ContainingType": "shoppetApi.Controllers.GenericController\u00603[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.AddOrderDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[shoppetApi.DTO.UpdateOrderStatusDTO, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-    "Method": "Update",
-    "RelativePath": "api/Order/Update/{id}",
+    "ContainingType": "shoppetApi.Controllers.OrderController",
+    "Method": "GetAll",
+    "RelativePath": "api/Order/GetMyOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.OrderController",
+    "Method": "GetSellerOrder",
+    "RelativePath": "api/Order/GetSellerOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PetShopApi.Models.Order, shoppetApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "shoppetApi.Controllers.OrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/Order/UpdateOrderStatus/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "dto",
+        "Name": "updateOrderDTO",
         "Type": "shoppetApi.DTO.UpdateOrderStatusDTO",
         "IsRequired": true
       }

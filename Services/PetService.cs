@@ -84,7 +84,7 @@ namespace shoppetApi.Services
             {
                 return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null);
             }
-            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, "fetched"), result);
+            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), result);
         }
 
         public async Task<APIResponse<IEnumerable<Pet>>> GetPetsByAgeRange(int minAge, int maxAge)
@@ -98,7 +98,7 @@ namespace shoppetApi.Services
             {
                 return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null);
             }
-            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, "fetched"), result);
+            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), result);
 
         }
 
@@ -124,7 +124,7 @@ namespace shoppetApi.Services
                 {
                     return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null);
                 }
-                return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, "fetched"), result);
+                return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), result);
 
             }
             return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.WrongGender, null);
@@ -142,7 +142,7 @@ namespace shoppetApi.Services
             {
                 return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null) ;   
             }
-            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, "fetched"), result);
+            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), result);
         }
     }
 }
