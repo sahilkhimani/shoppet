@@ -34,7 +34,5 @@ namespace PetShopApi.Models
         public User Owner { get; set; }
 
         public ICollection<Order> Orders { get; set; }
-
-
     }
 }
