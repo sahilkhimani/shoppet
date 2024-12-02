@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using PetShopApi.Models;
-using shoppetApi.DTO;
+using shoppetApi.Enums;
 using shoppetApi.Interfaces;
 
 namespace shoppetApi.Repository

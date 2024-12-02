@@ -1,4 +1,4 @@
-﻿namespace shoppetApi.DTO
+﻿namespace shoppetApi.Enums
 {
     public enum OrderStatusEnum
     {

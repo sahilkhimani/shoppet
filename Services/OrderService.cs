@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using PetShopApi.Models;
+﻿using PetShopApi.Models;
 using shoppetApi.DTO;
+using shoppetApi.Enums;
 using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
-using System.Runtime.CompilerServices;
 
 namespace shoppetApi.Services
 {
