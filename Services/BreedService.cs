@@ -8,11 +8,9 @@ namespace shoppetApi.Services
 {
     public class BreedService : IBreedService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IBreedRepository _breedRepository;
         public BreedService(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             _breedRepository = unitOfWork.Breeds;
         }
 

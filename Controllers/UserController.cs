@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using Humanizer;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
+using shoppetApi.Filters;
 using shoppetApi.Helper;
 using shoppetApi.Services;
-using System.Configuration;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
 
 namespace shoppetApi.Controllers
 {
@@ -21,20 +17,16 @@ namespace shoppetApi.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IGenericService<User> genericService, IMapper mapper, IUserService userService) : base(genericService, mapper)
+        public UserController(IMapper mapper, IGenericService<User> genericService, IUserService userService) : base(mapper, genericService)
         {
-            _userService = userService;
             _mapper = mapper;
+            _userService = userService;
         }
 
+        [ValidateModelState]
         [HttpPost("Register")]
         public override async Task<ActionResult<User>> Add([FromBody] UserRegistrationDTO userRegistrationDto)
         {
-         
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _userService.RegisterUser(userRegistrationDto);
@@ -73,7 +65,7 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("GetAll")]
         public override async Task<ActionResult<IEnumerable<User>>> GetAll()
         {

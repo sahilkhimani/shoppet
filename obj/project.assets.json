@@ -8199,11 +8199,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\shoppet-main\\shoppetApi.csproj",
+      "projectUniqueName": "D:\\C#\\petshop-API\\shoppetApi.csproj",
       "projectName": "shoppetApi",
-      "projectPath": "D:\\C#\\shoppet-main\\shoppetApi.csproj",
+      "projectPath": "D:\\C#\\petshop-API\\shoppetApi.csproj",
       "packagesPath": "C:\\Users\\khimasah\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\shoppet-main\\obj\\",
+      "outputPath": "D:\\C#\\petshop-API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khimasah\\AppData\\Roaming\\NuGet\\NuGet.Config",

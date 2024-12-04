@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
+using shoppetApi.Filters;
 using shoppetApi.Helper;
 using shoppetApi.Services;
-
 namespace shoppetApi.Controllers
 {
     [Route("api/[controller]")]
@@ -15,7 +15,7 @@ namespace shoppetApi.Controllers
     {
         private readonly IBreedService _breedService;
         private readonly IGenericService<Breed> _genericService;
-        public BreedController(IGenericService<Breed> genericService, IMapper mapper, IBreedService breedService) : base(genericService, mapper)
+        public BreedController(IGenericService<Breed> genericService, IMapper mapper, IBreedService breedService) : base(mapper, genericService)
         {
             _breedService = breedService;
             _genericService = genericService;
@@ -49,7 +49,7 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("Delete/{id}")]
         public override async Task<ActionResult<Breed>> Delete(string id)
         {
@@ -62,14 +62,10 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-
+        [ValidateModelState]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Breed>> Update(string id, [FromBody] BreedDTO breedDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var speciesExists = await _breedService.SpeciesExists(breedDTO.SpeciesId);

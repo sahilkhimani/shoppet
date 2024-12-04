@@ -16,7 +16,7 @@ namespace shoppetApi.Controllers
     {
         private readonly ISpeciesService _speciesService;
         private readonly IGenericService<Species> _genericService;
-        public SpeciesController(IGenericService<Species> genericService, IMapper mapper, ISpeciesService speciesService) : base(genericService, mapper)
+        public SpeciesController(IGenericService<Species> genericService, IMapper mapper, ISpeciesService speciesService) : base(mapper, genericService)
         {
             _speciesService = speciesService;
             _genericService = genericService;

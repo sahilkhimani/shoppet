@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using shoppetApi.Filters;
 using shoppetApi.Helper;
 using shoppetApi.Services;
 
@@ -18,28 +19,15 @@ namespace shoppetApi.Controllers
             _genericService = genericService;
         }
 
-        public GenericController(IGenericService<T> genericService, IMapper mapper)
-        {
-            _genericService = genericService;
-            _mapper = mapper;
-        }
-
+        [ValidateModelState]
         [HttpPost("Create")]
         public virtual async Task<ActionResult<T>> Add([FromBody] TAdd dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var data = _mapper.Map<T>(dto);
                 var result = await _genericService.Add(data);
-                if (!result.Success)
-                {
-                    return Conflict(result.Message);
-                }
-
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
             }
             catch (Exception ex)
@@ -53,18 +41,9 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                object parsedId = id;
-                if (int.TryParse(id, out var intId))
-                {
-                    if (intId <= 0)
-                    {
-                        return BadRequest(MessageConstants.InvalidId);
-                    }
-                    parsedId = intId;
-                }
-                var result = await _genericService.Delete(parsedId);
+                var result = await _genericService.Delete(id);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
-
             }
             catch (Exception ex)
             {
@@ -78,6 +57,7 @@ namespace shoppetApi.Controllers
             try
             {
                 var result = await _genericService.GetAll();
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -91,17 +71,8 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                object parsedId = id;
-                if (int.TryParse(id, out var intId))
-                {
-                    if(intId <= 0)
-                    {
-                        return BadRequest(MessageConstants.InvalidId);
-                    }
-                    parsedId = intId;
-                }
-                var result = await _genericService.GetById(parsedId);
-                if (result == null) return NotFound(MessageConstants.DataNotFound);
+                var result = await _genericService.GetById(id);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -110,32 +81,19 @@ namespace shoppetApi.Controllers
             }
         }
 
-
+        [ValidateModelState]
         [HttpPut("Update/{id}")]
         public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             { 
-                object parsedId = id;
-                if (int.TryParse(id, out var intId))
-                {
-                    if (intId <= 0)
-                    {
-                        return BadRequest(MessageConstants.InvalidId);
-                    }
-                    parsedId = intId;
-                }
-                var data = await _genericService.GetById(parsedId);
-                if (!data.Success) return NotFound(data.Message);
+                var data = await _genericService.GetById(id);
+                if (!data.Success) return BadRequest(data.Message);
 
                 var updatedData = _mapper.Map(dto, data.Data);
-                var updated = _mapper.Map<T>(updatedData);
+                var result = await _genericService.Update(id, updatedData!);
+                if (!result.Success) return BadRequest(data.Message);
 
-                var result = await _genericService.Update(parsedId, updated);
                 return Ok(result.Message);
             }
             catch (Exception ex)
