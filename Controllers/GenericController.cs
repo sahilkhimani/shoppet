@@ -91,9 +91,9 @@ namespace shoppetApi.Controllers
                 if (!data.Success) return BadRequest(data.Message);
 
                 var updatedData = _mapper.Map(dto, data.Data);
+
                 var result = await _genericService.Update(id, updatedData!);
                 if (!result.Success) return BadRequest(data.Message);
-
                 return Ok(result.Message);
             }
             catch (Exception ex)
@@ -101,6 +101,5 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-
     }
 }

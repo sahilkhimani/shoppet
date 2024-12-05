@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
@@ -14,34 +13,20 @@ namespace shoppetApi.Controllers
     public class BreedController : GenericController<Breed, BreedDTO, BreedDTO>
     {
         private readonly IBreedService _breedService;
-        private readonly IGenericService<Breed> _genericService;
         public BreedController(IGenericService<Breed> genericService, IMapper mapper, IBreedService breedService) : base(mapper, genericService)
         {
             _breedService = breedService;
-            _genericService = genericService;
         }
 
+        [ValidateModelState]
         [HttpPost("Create")]
         public override async Task<ActionResult<Breed>> Add([FromBody] BreedDTO breedDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
-                var speciesExists = await _breedService.SpeciesExists(breedDTO.SpeciesId);
-                var breedExists = await _breedService.BreedExists(breedDTO.BreedName);
-                if (!speciesExists)
-                {
-                    return Conflict(MessageConstants.NotExistsSpecies);
-                }
-                if (breedExists)
-                {
-                    return Conflict(MessageConstants.AlreadyExistsBreed);
-                }
-                breedDTO.BreedName = _genericService.ApplyTitleCase(breedDTO.BreedName);
-                return await base.Add(breedDTO);
+                var result = await _breedService.Add(breedDTO);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -68,17 +53,9 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                var speciesExists = await _breedService.SpeciesExists(breedDTO.SpeciesId);
-                var breedExists = await _breedService.BreedExists(breedDTO.BreedName);
-                if (!speciesExists)
-                {
-                    return Conflict(MessageConstants.NotExistsSpecies);
-                }
-                if (breedExists)
-                {
-                    return Conflict(MessageConstants.AlreadyExistsBreed);
-                }
-                return await base.Update(id, breedDTO);
+                var result = await _breedService.Update(id, breedDTO);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -91,11 +68,8 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                if(id <= 0)
-                {
-                    return BadRequest(MessageConstants.InvalidId);
-                }
                 var result = await _breedService.GetSameSpeciesBreeds(id);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)

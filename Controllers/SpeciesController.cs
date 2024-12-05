@@ -35,7 +35,7 @@ namespace shoppetApi.Controllers
                 var result = await _speciesService.AlreadyExists(speciesDTO.SpeciesName);
                 if (result)
                 {
-                    return Conflict(MessageConstants.AlredyExistsSpecies);
+                    //return Conflict(MessageConstants.AlredyExistsSpecies);
                 }
                 speciesDTO.SpeciesName =  _genericService.ApplyTitleCase(speciesDTO.SpeciesName);
                 return await base.Add(speciesDTO);
@@ -72,7 +72,7 @@ namespace shoppetApi.Controllers
                 var result = await _speciesService.AlreadyExists(speciesDTO.SpeciesName);
                 if (result)
                 {
-                    return Conflict(MessageConstants.AlredyExistsSpecies);
+                    //return Conflict(MessageConstants.AlredyExistsSpecies);
                 }
                 return await base.Update(id, speciesDTO);
             }

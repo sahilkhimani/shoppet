@@ -1,7 +1,4 @@
-﻿using NuGet.DependencyResolver;
-using PetShopApi.Models;
-using shoppetApi.DTO;
-using shoppetApi.Helper;
+﻿using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
 using System.Globalization;
@@ -36,19 +33,11 @@ namespace shoppetApi.Services
         {
             try
             {
-                object parsedId = id;
-                if (parsedId is string stringId)
-                {
-                    if (int.TryParse(stringId, out int intId))
-                    {
-                        if (intId <= 0) return APIResponse<T>.CreateResponse(false, MessageConstants.InvalidId, null);
-                        parsedId = intId;
-                    }
-                }
                 var result = await GetById(id);
-                if (!result.Success) return APIResponse<T>.CreateResponse(false, result.Message, null);
-                
-                await _genericRepository.Delete(parsedId);
+                if (!result.Success) return result;
+
+                var parsedId = HelperMethods.ParseId(id);
+                await _genericRepository.Delete(parsedId!);
                 await _unitOfWork.SaveAsync();
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.deletedMessage), null);
             }
@@ -62,7 +51,7 @@ namespace shoppetApi.Services
             try
             {
                 var result = await _genericRepository.GetAll();
-                if (result == null) return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
+                if (!result.Any()) return APIResponse<IEnumerable<T>>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                
                 return APIResponse<IEnumerable<T>>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.fetchedMessage), result);
             }
@@ -76,23 +65,17 @@ namespace shoppetApi.Services
         {
             try
             {
-                object parsedId = id;
-                if (parsedId is string stringId)
-                {
-                    if (int.TryParse(stringId, out int intId))
-                    {
-                        if (intId <= 0) return APIResponse<T>.CreateResponse(false, MessageConstants.InvalidId, null);
-                        parsedId = intId;
-                    }
-                }
+                var parsedId = HelperMethods.ParseId(id);
+                if(parsedId == null) return APIResponse<T>.CreateResponse(false, MessageConstants.InvalidId, null);
+          
                 var result = await _genericRepository.GetById(parsedId);
                 if (result == null) return APIResponse<T>.CreateResponse(false, MessageHelper.NotFound(typeof(T).Name), null);
                 
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.retrievedMessage), result);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.fetchedMessage), result);
             }
             catch (Exception ex)
             {
-                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.retrievingMessage, ex.Message), null);
+                return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.fetchingMessage, ex.Message), null);
             }
 
         }   

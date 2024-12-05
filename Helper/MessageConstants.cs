@@ -8,8 +8,6 @@ namespace shoppetApi.Helper
         public const string creatingMessage = "creating";
         public const string fetchedMessage = "fetched";
         public const string fetchingMessage = "fetching";
-        public const string retrievedMessage = "retrieved";
-        public const string retrievingMessage = "retrieving";
         public const string updatedMessage = "updated";
         public const string updatingMessage = "updating";
         public const string deletedMessage = "deleted";
@@ -32,8 +30,8 @@ namespace shoppetApi.Helper
         public const string UnAuthorizedUser = "User is not authorized to access";
         public const string NoUser = "No User Found";
 
-        public const string AlredyExistsSpecies = "Species already exists";
-        public const string NotExistsSpecies = "Species Not Exists";
+        public const string AlredyExistsSpeciesMessage = "Species already exists";
+        public const string NotExistsSpeciesMessage = "Species Not Exists";
 
         public const string AlreadyExistsBreed = "Breed Already Exists";
         public const string NotExistsBreed = "Breed Not Exists";
