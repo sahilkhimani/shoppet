@@ -15,11 +15,9 @@ namespace shoppetApi.Controllers
         public class UserController : GenericController<User, UserRegistrationDTO, UserUpdateDTO>
         {
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
 
-        public UserController(IMapper mapper, IGenericService<User, UserRegistrationDTO, UserUpdateDTO> genericService, IUserService userService) : base(genericService)
+        public UserController(IGenericService<User, UserRegistrationDTO, UserUpdateDTO> genericService, IUserService userService) : base(genericService)
         {
-            _mapper = mapper;
             _userService = userService;
         }
 
@@ -30,12 +28,9 @@ namespace shoppetApi.Controllers
             try
             {
                 var result = await _userService.RegisterUser(userRegistrationDto);
-                if (result.Success)
-                {
-                    return Ok(result.Message);
-                }
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
                 
-                return BadRequest(result.Message);
             }
             catch (Exception ex)
             {
@@ -43,21 +38,15 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [ValidateModelState]
         [HttpPost("Login")]
         public async Task<ActionResult<User>> Login([FromBody] UserLoginDTO userLoginDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _userService.LoginUser(userLoginDTO);
-            if (!result.Success)
-            {
-                return BadRequest(result.Message);
-            }
-            return Ok(result);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -85,11 +74,14 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                var result = _userService.ValidUser(id);
-                if (!result && !User.IsInRole("Admin"))
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
+                var result = await _userService.GetById(id);
+                if (!result.Success) return Unauthorized(result.Message);
+                return Ok(result);
+                //var result = _userService.ValidUser(id);
+                //if (!result && !User.IsInRole("Admin"))
+                //{
+                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                //}
                 return await base.GetById(id);
             }
             catch (Exception ex)
@@ -102,13 +94,13 @@ namespace shoppetApi.Controllers
         [HttpDelete("Delete/{id}")]
         public override async Task<ActionResult<User>> Delete(string id)
         {
-            var result = _userService.ValidUser(id);
+            //var result = _userService.ValidUser(id);
             try
             {
-                if (!result && !User.IsInRole("Admin"))
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
+                //if (!result && !User.IsInRole("Admin"))
+                //{
+                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                //}
                 return await base.Delete(id);
             }
             catch (Exception ex)
@@ -127,11 +119,11 @@ namespace shoppetApi.Controllers
             }
             try
             {
-                var result = _userService.ValidUser(id);
-                if (!result)
-                {
-                    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                }
+                //var result = _userService.ValidUser(id);
+                //if (!result)
+                //{
+                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
+                //}
                 var response = await _userService.UpdateUser(id, userUpdateDTO);
                 if (!response.Success)
                 {

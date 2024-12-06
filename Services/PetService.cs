@@ -48,7 +48,7 @@ namespace shoppetApi.Services
             var currentUserId = _httpContextHelper.GetCurrentUserId();
             if (ownerId == null || ownerId != currentUserId)
             {
-                return MessageConstants.UnAuthorizedUser;
+                return MessageConstants.UnAuthorizedUserMessage;
             }
             return ownerId;
         }
@@ -60,7 +60,7 @@ namespace shoppetApi.Services
             var petGender = petDTO.PetGender.ToLower();
             if (userId == null)
             {
-                return MessageConstants.NoUser;
+                return MessageConstants.NoUserFoundMessage;
             }
             if (!breedExists)
             {
@@ -70,7 +70,8 @@ namespace shoppetApi.Services
             {
                 return MessageConstants.WrongGender;
             }
-            return userId;
+            return "hello";
+            //return userId;
         }
 
         public async Task<APIResponse<IEnumerable<Pet>>> GetPetsByAge(int age)
@@ -135,14 +136,14 @@ namespace shoppetApi.Services
             var currentUserId = _httpContextHelper.GetCurrentUserId();
             if(currentUserId == null)
             {
-                return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.UnAuthenticatedUser, null);
+                return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.UnAuthenticatedUserMessage, null);
             }
-            var result = await _petRepository.GetYourPets(currentUserId);
-            if(result == null || !result.Any())
-            {
-                return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null) ;   
-            }
-            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), result);
+            //var result = await _petRepository.GetYourPets(currentUserId);
+            //if(result == null || !result.Any())
+            //{
+            //    return APIResponse<IEnumerable<Pet>>.CreateResponse(false, MessageConstants.DataNotFound, null) ;   
+            //}
+            return APIResponse<IEnumerable<Pet>>.CreateResponse(true, MessageHelper.Success(typeof(Pet).Name, MessageConstants.fetchedMessage), null); //returning result here
         }
     }
 }

@@ -39,7 +39,7 @@ namespace shoppetApi.Controllers
             try
             {
                 var checkData = await _petService.CheckUser(petDTO);
-                if (checkData == MessageConstants.UnAuthenticatedUser || checkData == MessageConstants.NotExistsBreed
+                if (checkData == MessageConstants.UnAuthenticatedUserMessage || checkData == MessageConstants.NotExistsBreed
                     || checkData == MessageConstants.WrongGender)
                 {
                     return BadRequest(checkData);
@@ -73,7 +73,7 @@ namespace shoppetApi.Controllers
                 {
                     return BadRequest(ownPet);
                 }
-                if (ownPet == MessageConstants.UnAuthorizedUser) return Unauthorized(ownPet);
+                if (ownPet == MessageConstants.UnAuthorizedUserMessage) return Unauthorized(ownPet);
                 return await base.Delete(id);
             }
             catch (Exception ex)
@@ -92,7 +92,7 @@ namespace shoppetApi.Controllers
             try
             {
                 var checkData = await _petService.CheckUser(petDTO);
-                if (checkData == MessageConstants.NoUser || checkData == MessageConstants.NotExistsBreed
+                if (checkData == MessageConstants.NoUserFoundMessage || checkData == MessageConstants.NotExistsBreed
                     || checkData == MessageConstants.WrongGender)
                 {
                     return BadRequest(checkData);
@@ -102,7 +102,7 @@ namespace shoppetApi.Controllers
                 {
                     return BadRequest(ownPet);
                 }
-                if (ownPet == MessageConstants.UnAuthorizedUser) return Unauthorized(ownPet);
+                if (ownPet == MessageConstants.UnAuthorizedUserMessage) return Unauthorized(ownPet);
                 return await base.Update(id, petDTO);
             }
             catch (Exception ex)

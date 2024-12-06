@@ -26,10 +26,11 @@ namespace shoppetApi.Helper
         public const string NullId = "Id can not be null";
         public const string DataNotFound = "Data not found";
 
-        public const string UnAuthenticatedUser = "User is not authenticated";
-        public const string UnAuthorizedUser = "User is not authorized to access";
-        public const string NoUser = "No User Found";
-
+        public const string InvalidCredentialsMessage = "Invalid Credentials";
+        public const string TokenCreationErrorMessage = "Error Occured While Creating Token";
+        public const string UnAuthenticatedUserMessage = "User is not authenticated";
+        public const string UnAuthorizedUserMessage = "User is not authorized to access";
+        public const string NoUserFoundMessage = "No User Found";
 
         public const string NotExistsBreed = "Breed Not Exists";
 

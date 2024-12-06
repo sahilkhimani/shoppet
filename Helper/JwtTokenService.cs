@@ -39,7 +39,6 @@ namespace shoppetApi.Helper
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: creds
             );
-
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

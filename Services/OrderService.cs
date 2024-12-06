@@ -20,7 +20,7 @@ namespace shoppetApi.Services
             _unitOfWork = unitOfWork;
             _orderRepository = _unitOfWork.Orders;
             _contextHelper = httpContextHelper;
-            userId = _contextHelper.GetCurrentUserId();
+            //userId = _contextHelper.GetCurrentUserId();
         }
         public async Task<APIResponse<Order>> CreateOrder(AddOrderDTO addOrderDTO)
         {
@@ -97,7 +97,7 @@ namespace shoppetApi.Services
                 {
                     return APIResponse<Order>.CreateResponse(true, MessageHelper.Success(typeof(Order).Name, MessageConstants.fetchedMessage), result);
                 }
-                return APIResponse<Order>.CreateResponse(false, MessageConstants.UnAuthorizedUser, null);
+                return APIResponse<Order>.CreateResponse(false, MessageConstants.UnAuthorizedUserMessage, null);
             }
             catch (Exception ex)
             {
@@ -146,7 +146,7 @@ namespace shoppetApi.Services
                 var updatedStatus = updateOrderDTO.OrderStatus;
                 if (data.BuyerId != userId)
                 {
-                    return APIResponse<Order>.CreateResponse(false, MessageConstants.UnAuthorizedUser, null);
+                    return APIResponse<Order>.CreateResponse(false, MessageConstants.UnAuthorizedUserMessage, null);
                 }
                 if(orderStatus == OrderStatusEnum.Cancelled.ToString())
                 {
