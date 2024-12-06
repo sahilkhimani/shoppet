@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
@@ -13,7 +12,8 @@ namespace shoppetApi.Controllers
     public class BreedController : GenericController<Breed, BreedDTO, BreedDTO>
     {
         private readonly IBreedService _breedService;
-        public BreedController(IGenericService<Breed> genericService, IMapper mapper, IBreedService breedService) : base(mapper, genericService)
+
+        public BreedController(IGenericService<Breed, BreedDTO, BreedDTO> genericService, IBreedService breedService) : base(genericService)
         {
             _breedService = breedService;
         }

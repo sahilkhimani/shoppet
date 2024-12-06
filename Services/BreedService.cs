@@ -10,6 +10,9 @@ namespace shoppetApi.Services
 {
     public class BreedService : IBreedService
     {
+        public const string AlreadyExistsBreedMessage = "Breed Already Exists";
+        public const string NotExistsSpeciesMessage = "Species Not Exists";
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBreedRepository _breedRepository;
         private readonly IMapper _mapper;
@@ -53,9 +56,9 @@ namespace shoppetApi.Services
         public async Task<APIResponse<Breed>> BreedAndSpeciesExists(BreedDTO breedDTO)
         {
             var speciesExists = await SpeciesExists(breedDTO.SpeciesId);
-            if (!speciesExists) return APIResponse<Breed>.CreateResponse(false, MessageConstants.NotExistsSpeciesMessage, null);
+            if (!speciesExists) return APIResponse<Breed>.CreateResponse(false, NotExistsSpeciesMessage, null);
             var breedExists = await BreedExists(breedDTO.BreedName);
-            if (breedExists) return APIResponse<Breed>.CreateResponse(false, MessageConstants.AlreadyExistsBreed, null);
+            if (breedExists) return APIResponse<Breed>.CreateResponse(false, AlreadyExistsBreedMessage, null);
             return APIResponse<Breed>.CreateResponse(true, "ok", null);
         }
 

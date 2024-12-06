@@ -1,28 +1,32 @@
-﻿using shoppetApi.Helper;
+﻿using AutoMapper;
+using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
 using System.Globalization;
 
 namespace shoppetApi.Services
 {
-    public class GenericService<T> : IGenericService<T> where T : class
+    public class GenericService<T, TAdd, TUpdate> : IGenericService<T, TAdd, TUpdate> where T : class where TAdd : class where TUpdate : class
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGenericRepository<T> _genericRepository;
+        private readonly IMapper _mapper;
 
-        public GenericService(IUnitOfWork unitOfWork)
+        public GenericService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _genericRepository = _unitOfWork.GenericRepository<T>();
+            _mapper = mapper;
         }
 
-        public async Task<APIResponse<T>> Add(T entity)
+        public async Task<APIResponse<T>> Add(TAdd dto)
         {
             try
             {
-                await _genericRepository.Add(entity);
+                var data = _mapper.Map<T>(dto);
+                await _genericRepository.Add(data);
                 await _unitOfWork.SaveAsync();
-                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.createdMessage), entity);
+                return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.createdMessage), data);
             }
             catch (Exception ex) {
                 return APIResponse<T>.CreateResponse(false, MessageHelper.Exception(typeof(T).Name, MessageConstants.creatingMessage, ex.Message), null);
@@ -80,11 +84,16 @@ namespace shoppetApi.Services
 
         }   
 
-        public async Task<APIResponse<T>> Update(object id, T entity)
+        public async Task<APIResponse<T>> Update(object id, TUpdate dto)
         {
             try
             {
-                await _genericRepository.Update(id, entity);
+                var data = await GetById(id);
+                if (!data.Success) return data;
+
+                var updatedData = _mapper.Map(dto, data.Data);
+
+                await _genericRepository.Update(id, updatedData!);
                 await _unitOfWork.SaveAsync();
                 
                 return APIResponse<T>.CreateResponse(true, MessageHelper.Success(typeof(T).Name, MessageConstants.updatedMessage), null);

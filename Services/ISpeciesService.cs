@@ -6,6 +6,8 @@ namespace shoppetApi.Services
 {
     public interface ISpeciesService 
     {
-        public Task<bool> AlreadyExists(string name);
+        public Task<APIResponse<Species>> Add(SpeciesDTO speciesDTO);
+        public Task<APIResponse<Species>> Update(string id, SpeciesDTO speciesDTO);
+
     }
 }

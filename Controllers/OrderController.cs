@@ -15,7 +15,7 @@ namespace shoppetApi.Controllers
     public class OrderController : GenericController<Order, AddOrderDTO, UpdateOrderStatusDTO>
     {
         private readonly IOrderService _orderService;
-        public OrderController(IMapper mapper, IGenericService<Order> genericService, IOrderService orderService) : base(mapper, genericService)
+        public OrderController(IMapper mapper, IGenericService<Order, AddOrderDTO, UpdateOrderStatusDTO> genericService, IOrderService orderService) : base(genericService)
         {
             _orderService = orderService;
         }

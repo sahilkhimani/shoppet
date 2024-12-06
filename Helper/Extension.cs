@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using PetShopApi.Data;
 using PetShopApi.Models;
@@ -9,7 +8,6 @@ using shoppetApi.Interfaces;
 using shoppetApi.MyUnitOfWork;
 using shoppetApi.Repository;
 using shoppetApi.Services;
-using System.Security.Claims;
 using System.Text;
 
 namespace shoppetApi.Helper
@@ -18,7 +16,7 @@ namespace shoppetApi.Helper
     {
         public static void RegisterServices(this IServiceCollection services) { 
             services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
-            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+            services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISpeciesService, SpeciesService>();

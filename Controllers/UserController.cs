@@ -17,7 +17,7 @@ namespace shoppetApi.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IMapper mapper, IGenericService<User> genericService, IUserService userService) : base(mapper, genericService)
+        public UserController(IMapper mapper, IGenericService<User, UserRegistrationDTO, UserUpdateDTO> genericService, IUserService userService) : base(genericService)
         {
             _mapper = mapper;
             _userService = userService;

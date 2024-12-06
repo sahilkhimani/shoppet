@@ -30,10 +30,7 @@ namespace shoppetApi.Helper
         public const string UnAuthorizedUser = "User is not authorized to access";
         public const string NoUser = "No User Found";
 
-        public const string AlredyExistsSpeciesMessage = "Species already exists";
-        public const string NotExistsSpeciesMessage = "Species Not Exists";
 
-        public const string AlreadyExistsBreed = "Breed Already Exists";
         public const string NotExistsBreed = "Breed Not Exists";
 
         public const string WrongGender = "Please Select the right gender";

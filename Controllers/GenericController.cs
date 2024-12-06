@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using shoppetApi.Filters;
 using shoppetApi.Helper;
 using shoppetApi.Services;
@@ -10,12 +9,10 @@ namespace shoppetApi.Controllers
     [ApiController]
     public class GenericController<T, TAdd, TUpdate> : ControllerBase, IGenericController<T, TAdd, TUpdate> where T : class where TAdd : class where TUpdate : class
     {
-        private readonly IGenericService<T> _genericService;
-        private readonly IMapper _mapper;
+        private readonly IGenericService<T, TAdd, TUpdate> _genericService;
 
-        public GenericController(IMapper mapper, IGenericService<T> genericService)
+        public GenericController(IGenericService<T, TAdd, TUpdate> genericService)
         {
-            _mapper = mapper;
             _genericService = genericService;
         }
 
@@ -25,8 +22,7 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                var data = _mapper.Map<T>(dto);
-                var result = await _genericService.Add(data);
+                var result = await _genericService.Add(dto);
                 if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
             }
@@ -87,13 +83,8 @@ namespace shoppetApi.Controllers
         {
             try
             { 
-                var data = await _genericService.GetById(id);
-                if (!data.Success) return BadRequest(data.Message);
-
-                var updatedData = _mapper.Map(dto, data.Data);
-
-                var result = await _genericService.Update(id, updatedData!);
-                if (!result.Success) return BadRequest(data.Message);
+                var result = await _genericService.Update(id, dto);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
             }
             catch (Exception ex)

@@ -19,10 +19,10 @@ namespace shoppetApi.Controllers
     public class PetController : GenericController<Pet, PetDTO, PetDTO>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericService<Pet> _genericService;
+        private readonly IGenericService<Pet, PetDTO, PetDTO> _genericService;
         private readonly IPetService _petService;
 
-        public PetController(IMapper mapper, IGenericService<Pet> genericService, IPetService petService) : base(mapper, genericService)
+        public PetController(IMapper mapper, IGenericService<Pet, PetDTO, PetDTO> genericService, IPetService petService) : base(genericService)
         {
             _mapper = mapper;   
             _genericService = genericService;
@@ -49,7 +49,7 @@ namespace shoppetApi.Controllers
                 data.OwnerId = checkData;
                 data.PetName = _genericService.ApplyTitleCase(data.PetName);
 
-                var result = await _genericService.Add(data);
+                var result = await _genericService.Add(petDTO); //changed data to petDTO
                 if (!result.Success)
                 {
                     return Conflict(result.Message);
