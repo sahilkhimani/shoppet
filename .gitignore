@@ -1,0 +1,28 @@
+# Build directories
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.swp
+*.log
+
+# IDE-specific directories
+.vs/
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Dependency folders
+node_modules/
+packages/
+
+# Generated files
+*.db
+*.bak
+*.cache
+
