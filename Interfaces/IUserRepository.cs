@@ -4,6 +4,6 @@ namespace shoppetApi.Interfaces
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-       
+
     }
 }

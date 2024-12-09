@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Converters;
 using PetShopApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -23,7 +22,7 @@ namespace shoppetApi.Helper
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };      
+            };
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

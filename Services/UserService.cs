@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
@@ -28,83 +27,117 @@ namespace shoppetApi.Services
 
         public async Task<APIResponse<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
         {
-            var emailExist = await _userManager.FindByEmailAsync(userRegistrationDTO.UserEmail);
-            if (emailExist != null) return APIResponse<User>.CreateResponse(false, MessageHelper.AlreadyExists(userRegistrationDTO.UserEmail), null);
-
-            var role = await _roleRepository.GetRole(userRegistrationDTO.RoleId);
-            if (role == null || role.Name == Roles.Admin)
+            try
             {
-                return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(nameof(Role)), null);
-            }
-            var user = _mapper.Map<User>(userRegistrationDTO);
-            var result = await _userManager.CreateAsync(user, userRegistrationDTO.Password);
+                var emailExist = await _userManager.FindByEmailAsync(userRegistrationDTO.UserEmail);
+                if (emailExist != null) return APIResponse<User>.CreateResponse(false, MessageHelper.AlreadyExists(userRegistrationDTO.UserEmail), null);
 
-            if (!result.Succeeded) return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
-            await _userManager.AddToRoleAsync(user, role.Name!);
-            return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.createdMessage), null);
+                var role = await _roleRepository.GetRole(userRegistrationDTO.RoleId);
+                if (role == null || role.Name == Roles.Admin)
+                {
+                    return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(nameof(Role)), null);
+                }
+                var user = _mapper.Map<User>(userRegistrationDTO);
+                var result = await _userManager.CreateAsync(user, userRegistrationDTO.Password);
+
+                if (!result.Succeeded) return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+                await _userManager.AddToRoleAsync(user, role.Name!);
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.createdMessage), null);
+            }
+            catch (Exception ex)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.Exception(nameof(User), MessageConstants.RegisterUserException, ex.Message), null);
+            }
         }
 
         public async Task<APIResponse<User>> LoginUser(UserLoginDTO userLoginDTO)
         {
-            var user = await _userManager.FindByEmailAsync(userLoginDTO.UserEmail);
-            if (user == null) return APIResponse<User>.CreateResponse(false, MessageConstants.InvalidCredentialsMessage, null);
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(userLoginDTO.UserEmail);
+                if (user == null) return APIResponse<User>.CreateResponse(false, MessageConstants.InvalidCredentialsMessage, null);
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, userLoginDTO.Password);
-            if (!isPasswordValid) return APIResponse<User>.CreateResponse(false, MessageConstants.InvalidCredentialsMessage, null);
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, userLoginDTO.Password);
+                if (!isPasswordValid) return APIResponse<User>.CreateResponse(false, MessageConstants.InvalidCredentialsMessage, null);
 
-            var roles = await _userManager.GetRolesAsync(user);
-            if (roles.Count == 0) return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(nameof(Role)), null);
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles.Count == 0) return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(nameof(Role)), null);
 
-            var token = _jwtTokenService.GenerateJwtToken(user, roles);
-            if (token == null) return APIResponse<User>.CreateResponse(false, MessageConstants.TokenCreationErrorMessage, null);
-            
-            return APIResponse<User>.CreateResponse(true, token, null);
+                var token = _jwtTokenService.GenerateJwtToken(user, roles);
+                if (token == null) return APIResponse<User>.CreateResponse(false, MessageConstants.TokenCreationErrorMessage, null);
+
+                return APIResponse<User>.CreateResponse(true, token, null);
+            }
+            catch (Exception ex)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.Exception(nameof(User), MessageConstants.LoginUserException, ex.Message), null);
+            }
         }
 
         public async Task<APIResponse<User>> UpdateUser(string id, UserUpdateDTO userUpdateDTO)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
+            try
             {
-                return APIResponse<User>.CreateResponse(false, MessageHelper.NotFound(typeof(User).Name), null);
-            }
-            if (!userUpdateDTO.CurrentPassword.IsNullOrEmpty() && !userUpdateDTO.Password.IsNullOrEmpty())
-            {
-                var passwordUpdate = await _userManager.ChangePasswordAsync(user, userUpdateDTO.CurrentPassword, userUpdateDTO.Password);
-                if (!passwordUpdate.Succeeded)
-                {
-                    return APIResponse<User>.CreateResponse(false, passwordUpdate.Errors.First().Description, null);
-                }
-            }
-            user.UserName = userUpdateDTO.UserName;
-            user.PhoneNumber = userUpdateDTO.PhoneNumber;
+                var user = await GetById(id);
+                if (!user.Success || user.Data == null) return user;
 
-            var result = await _userManager.UpdateAsync(user);
-            if (result.Succeeded)
-            {
-                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(typeof(User).Name, MessageConstants.updatedMessage), null);
+                var userDetails = user.Data;
+                var passwordUpdate = await _userManager.ChangePasswordAsync(userDetails, userUpdateDTO.CurrentPassword, userUpdateDTO.Password);
+                if (!passwordUpdate.Succeeded) return APIResponse<User>.CreateResponse(false, passwordUpdate.Errors.First().Description, null);
+
+                userDetails.UserName = userUpdateDTO.UserName;
+                userDetails.PhoneNumber = userUpdateDTO.PhoneNumber;
+
+                var result = await _userManager.UpdateAsync(userDetails);
+                if (!result.Succeeded) return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.updatedMessage), null);
             }
-            return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+            catch (Exception ex)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.Exception(nameof(User), MessageConstants.updatingMessage, ex.Message), null);
+            }
+        }
+        public async Task<APIResponse<User>> GetById(string id)
+        {
+            try
+            {
+                var user = ValidUser(id);
+                if (!user) return APIResponse<User>.CreateResponse(false, MessageConstants.UnAuthorizedUserMessage, null);
+                var result = await _userManager.FindByIdAsync(id);
+                if (result == null) return APIResponse<User>.CreateResponse(false, MessageConstants.NoUserFoundMessage, null);
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.fetchedMessage), result);
+            }
+            catch (Exception ex)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.Exception(nameof(User), MessageConstants.fetchingMessage, ex.Message), null);
+            }
         }
 
+        public async Task<APIResponse<User>> DeleteUser(string id)
+        {
+            try
+            {
+                var user = await GetById(id);
+                if (!user.Success || user.Data == null) return user;
+                var result = await _userManager.DeleteAsync(user.Data);
+                if (!result.Succeeded) return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
+                return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.deletedMessage), null);
+            }
+            catch (Exception ex)
+            {
+                return APIResponse<User>.CreateResponse(false, MessageHelper.Exception(nameof(User), MessageConstants.deletingMessage, ex.Message), null);
+            }
+        }
         public bool ValidUser(string id)
         {
             var userId = _contextHelper.GetCurrentUserId();
             var userRole = _contextHelper.GetCurrentUserRole();
-            if(userRole != Roles.Admin)
+            if (userRole != Roles.Admin)
             {
                 if (userId == null || userId != id) return false;
             }
             return true;
-        }
-
-        public async Task<APIResponse<User>> GetById(string id)
-        {
-            var user = ValidUser(id);
-            if (!user) return APIResponse<User>.CreateResponse(false, MessageConstants.UnAuthorizedUserMessage, null);
-            var result = await _userManager.FindByIdAsync(id);
-            if (result == null) return APIResponse<User>.CreateResponse(false, MessageConstants.NoUserFoundMessage, null);
-            return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.fetchedMessage), result);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace shoppetApi.MyUnitOfWork
 
         public IGenericRepository<T> GenericRepository<T>() where T : class
         {
-            if(_repositories.ContainsKey(typeof( T )))
+            if (_repositories.ContainsKey(typeof(T)))
             {
                 return (IGenericRepository<T>)_repositories[typeof(T)];
             }
@@ -56,7 +56,7 @@ namespace shoppetApi.MyUnitOfWork
 
         public async Task<int> SaveAsync()
         {
-           return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
     }
 }

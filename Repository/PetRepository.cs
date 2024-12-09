@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using PetShopApi.Models;
-using shoppetApi.Helper;
 using shoppetApi.Interfaces;
 
 namespace shoppetApi.Repository
@@ -9,17 +8,18 @@ namespace shoppetApi.Repository
     public class PetRepository : GenericRepository<Pet>, IPetRepository
     {
         private readonly ApiDbContext _context;
-        public PetRepository(ApiDbContext context) : base(context) 
+        public PetRepository(ApiDbContext context) : base(context)
         {
             _context = context;
         }
 
         public string GetOwnerOnPetId(int id)
         {
-            return _context.Pets
+            var ownerId = _context.Pets
                 .Where(x => x.PetId == id)
                 .Select(x => x.OwnerId)
-                .First();
+                .FirstOrDefault();
+            return ownerId;
         }
 
         public async Task<IEnumerable<Pet>> GetPetsByAge(int age)
@@ -34,8 +34,8 @@ namespace shoppetApi.Repository
         {
             return await _context.Pets
                 .AsNoTracking()
-                .Where(x=> x.PetAge >= minAge && x.PetAge <= maxAge)
-                .ToListAsync(); 
+                .Where(x => x.PetAge >= minAge && x.PetAge <= maxAge)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Pet>> GetPetsByBreedId(int id)
@@ -58,7 +58,7 @@ namespace shoppetApi.Repository
         {
             return await _context.Pets
                 .AsNoTracking()
-                .Where(x => x.OwnerId ==  id)
+                .Where(x => x.OwnerId == id)
                 .ToListAsync();
         }
     }

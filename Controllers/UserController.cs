@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopApi.Models;
 using shoppetApi.DTO;
@@ -12,8 +11,8 @@ namespace shoppetApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-        public class UserController : GenericController<User, UserRegistrationDTO, UserUpdateDTO>
-        {
+    public class UserController : GenericController<User, UserRegistrationDTO, UserUpdateDTO>
+    {
         private readonly IUserService _userService;
 
         public UserController(IGenericService<User, UserRegistrationDTO, UserUpdateDTO> genericService, IUserService userService) : base(genericService)
@@ -30,7 +29,7 @@ namespace shoppetApi.Controllers
                 var result = await _userService.RegisterUser(userRegistrationDto);
                 if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
-                
+
             }
             catch (Exception ex)
             {
@@ -77,12 +76,6 @@ namespace shoppetApi.Controllers
                 var result = await _userService.GetById(id);
                 if (!result.Success) return Unauthorized(result.Message);
                 return Ok(result);
-                //var result = _userService.ValidUser(id);
-                //if (!result && !User.IsInRole("Admin"))
-                //{
-                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                //}
-                return await base.GetById(id);
             }
             catch (Exception ex)
             {
@@ -94,14 +87,11 @@ namespace shoppetApi.Controllers
         [HttpDelete("Delete/{id}")]
         public override async Task<ActionResult<User>> Delete(string id)
         {
-            //var result = _userService.ValidUser(id);
             try
             {
-                //if (!result && !User.IsInRole("Admin"))
-                //{
-                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                //}
-                return await base.Delete(id);
+                var result = await _userService.DeleteUser(id);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -109,33 +99,21 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [ValidateModelState]
         [Authorize]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<User>> Update(string id, [FromBody] UserUpdateDTO userUpdateDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
-                //var result = _userService.ValidUser(id);
-                //if (!result)
-                //{
-                //    return Unauthorized(MessageConstants.UnAuthorizedUser);
-                //}
-                var response = await _userService.UpdateUser(id, userUpdateDTO);
-                if (!response.Success)
-                {
-                    return BadRequest(response.Message);
-                }
-                return Ok(response.Message);
+                var result = await _userService.UpdateUser(id, userUpdateDTO);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-
     }
 }

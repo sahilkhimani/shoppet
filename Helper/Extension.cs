@@ -14,7 +14,8 @@ namespace shoppetApi.Helper
 {
     public static class Extension
     {
-        public static void RegisterServices(this IServiceCollection services) { 
+        public static void RegisterServices(this IServiceCollection services)
+        {
             services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
 
@@ -38,7 +39,8 @@ namespace shoppetApi.Helper
             services.AddScoped<IUserRepository, UserRepository>();
         }
 
-        public static void RegisterDb(this IServiceCollection services, IConfiguration configuration) {
+        public static void RegisterDb(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("dbcs")));
 

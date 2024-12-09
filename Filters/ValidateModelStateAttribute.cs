@@ -8,7 +8,8 @@ namespace shoppetApi.Filters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var _ModelState = context.ModelState;
-            if (!_ModelState.IsValid) {
+            if (!_ModelState.IsValid)
+            {
                 context.Result = new BadRequestObjectResult(_ModelState);
             }
         }

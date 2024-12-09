@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Humanizer;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
@@ -21,7 +20,7 @@ namespace shoppetApi.Services
         {
             _unitOfWork = unitOfWork;
             _breedRepository = unitOfWork.Breeds;
-            _mapper = mapper;   
+            _mapper = mapper;
         }
 
         public Task<bool> BreedExists(string name)
@@ -38,7 +37,7 @@ namespace shoppetApi.Services
         {
             try
             {
-                if(id <= 0) return APIResponse<IEnumerable<Breed>>.CreateResponse(false, MessageConstants.InvalidId, null);
+                if (id <= 0) return APIResponse<IEnumerable<Breed>>.CreateResponse(false, MessageConstants.InvalidId, null);
                 var dataExists = await SpeciesExists(id);
                 var result = await _breedRepository.GetSameSpeciesBreeds(id);
                 if (!result.Any() || !dataExists)
@@ -69,7 +68,6 @@ namespace shoppetApi.Services
                 var checkBreedAndSpecies = await BreedAndSpeciesExists(breedDTO);
                 if (!checkBreedAndSpecies.Success) return checkBreedAndSpecies;
 
-                breedDTO.BreedName = HelperMethods.ApplyTitleCase(breedDTO.BreedName);
                 var data = _mapper.Map<Breed>(breedDTO);
 
                 await _breedRepository.Add(data);
@@ -93,7 +91,6 @@ namespace shoppetApi.Services
                 var checkBreedAndSpecies = await BreedAndSpeciesExists(breedDTO);
                 if (!checkBreedAndSpecies.Success) return checkBreedAndSpecies;
 
-                breedDTO.BreedName = HelperMethods.ApplyTitleCase(breedDTO.BreedName);
                 var updatedData = _mapper.Map(breedDTO, data);
 
                 await _breedRepository.Update(parsedId, data);

@@ -20,8 +20,8 @@ namespace shoppetApi.DTO
         [Compare("Password", ErrorMessage = "Password do not match")]
         public string ConfirmPassword { get; set; }
         public string PhoneNumber { get; set; }
-        
-        [Required(ErrorMessage ="Please Select the Role")]
+
+        [Required(ErrorMessage = "Please Select the Role")]
         public string RoleId { get; set; }
     }
 }

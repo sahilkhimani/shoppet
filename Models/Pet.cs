@@ -8,7 +8,7 @@ namespace PetShopApi.Models
         [Key]
         public int PetId { get; set; }
 
-        [Required(ErrorMessage ="Please Enter the name of your pet")]
+        [Required(ErrorMessage = "Please Enter the name of your pet")]
         public string PetName { get; set; }
 
         [Required]
@@ -18,7 +18,7 @@ namespace PetShopApi.Models
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Price must be postive.")]
         public double PetPrice { get; set; }
-        
+
         [Required]
         public string PetGender { get; set; }
 

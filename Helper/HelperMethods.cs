@@ -7,7 +7,7 @@ namespace shoppetApi.Helper
         public static string ApplyTitleCase(string name)
         {
             TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-            return ti.ToTitleCase(name);
+            return ti.ToTitleCase(name.ToLower());
         }
 
         public static object? ParseId(object id)
@@ -16,12 +16,12 @@ namespace shoppetApi.Helper
             {
                 if (int.TryParse(stringId, out int intId))
                 {
-                    if (intId <= 0) return null; 
+                    if (intId <= 0) return null;
                     return intId;
                 }
                 return stringId;
             }
-            return id; 
+            return id;
         }
     }
 }

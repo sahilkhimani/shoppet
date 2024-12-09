@@ -37,7 +37,7 @@ namespace shoppetApi.Repository
                 .Where(x => _context.Pets
                 .Any(y => x.PetId == y.PetId && y.OwnerId == id))
                 .ToListAsync();
-            return orderList;   
+            return orderList;
         }
 
         public async Task<bool> PetAlreadyExists(int id)
@@ -46,10 +46,12 @@ namespace shoppetApi.Repository
                  .AsNoTracking()
                  .Where(x => x.PetId == id)
                  .OrderByDescending(o => o.OrderId)
-                 .FirstOrDefaultAsync();    
-            if (data != null) {
-                if (data.OrderStatus == OrderStatusEnum.Cancelled.ToString() || 
-                    data.OrderStatus == OrderStatusEnum.Failed.ToString())
+                 .FirstOrDefaultAsync();
+            if (data != null)
+            {
+                var orderStatus = data.OrderStatus.ToLower();
+                if (orderStatus == OrderStatusEnum.cancelled.ToString() ||
+                    orderStatus == OrderStatusEnum.failed.ToString())
                 {
                     return true;
                 }

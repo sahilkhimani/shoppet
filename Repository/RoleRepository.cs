@@ -1,5 +1,4 @@
-﻿using Microsoft.Identity.Client;
-using PetShopApi.Data;
+﻿using PetShopApi.Data;
 using PetShopApi.Models;
 using shoppetApi.Interfaces;
 
@@ -9,13 +8,13 @@ namespace shoppetApi.Repository
     {
         private readonly ApiDbContext _context;
         public RoleRepository(ApiDbContext context) : base(context)
-        { 
+        {
             _context = context;
         }
 
         public async Task<Role> GetRole(string roleId)
         {
-           return await _context.FindAsync<Role>(roleId);  
+            return await _context.FindAsync<Role>(roleId);
         }
     }
 }

@@ -29,9 +29,8 @@ namespace shoppetApi.Services
             try
             {
                 var alreadyExist = await AlreadyExists(speciesDTO.SpeciesName);
-                if(alreadyExist) return APIResponse<Species>.CreateResponse(false, AlredyExistsSpeciesMessage, null);
-               
-                speciesDTO.SpeciesName = HelperMethods.ApplyTitleCase(speciesDTO.SpeciesName);
+                if (alreadyExist) return APIResponse<Species>.CreateResponse(false, AlredyExistsSpeciesMessage, null);
+
                 var data = _mapper.Map<Species>(speciesDTO);
                 await _speciesRepository.Add(data);
                 await _unitOfWork.SaveAsync();
@@ -55,7 +54,6 @@ namespace shoppetApi.Services
                 var alreadyExist = await AlreadyExists(speciesDTO.SpeciesName);
                 if (alreadyExist) return APIResponse<Species>.CreateResponse(false, AlredyExistsSpeciesMessage, null);
 
-                speciesDTO.SpeciesName = HelperMethods.ApplyTitleCase(speciesDTO.SpeciesName);
                 var updatedData = _mapper.Map(speciesDTO, data);
 
                 await _speciesRepository.Update(parsedId, data);

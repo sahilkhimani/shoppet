@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-namespace shoppetApi.Helper
+﻿namespace shoppetApi.Helper
 {
     public static class MessageConstants
     {
@@ -32,16 +30,10 @@ namespace shoppetApi.Helper
         public const string UnAuthorizedUserMessage = "User is not authorized to access";
         public const string NoUserFoundMessage = "No User Found";
 
-        public const string NotExistsBreed = "Breed Not Exists";
-
-        public const string WrongGender = "Please Select the right gender";
-
-        public const string PetNotExists = "Pet Not Exists";
-
-        public const string NoOrderFoundMessage = "No Orders Yet";
-        public const string InvalidOperationMessage = "Invalid Operation Performed";
-        public const string OrderAlreadyCancelledMessage = "Order is already cancelled";
         public const string AlreadyStatusUpdated = "Order is already {0}";
+
+        public const string RegisterUserException = "registering";
+        public const string LoginUserException = "login";
     }
 }
 

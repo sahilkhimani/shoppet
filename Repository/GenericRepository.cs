@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopApi.Data;
 using shoppetApi.Interfaces;
-using System;
 
 namespace shoppetApi.Repository
 {
@@ -17,14 +16,15 @@ namespace shoppetApi.Repository
 
         public async Task Add(T entity)
         {
-           await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity);
         }
 
         public async Task Delete(object id)
         {
             var entity = await _dbSet.FindAsync(id);
-            if (entity != null) {
-                 _dbSet.Remove(entity);
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
             }
         }
 
@@ -40,7 +40,7 @@ namespace shoppetApi.Repository
 
         public async Task Update(object id, T entity)
         {
-          _dbSet.Update(entity);
+            _dbSet.Update(entity);
         }
     }
 }

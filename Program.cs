@@ -1,9 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 using shoppetApi.Controllers;
 using shoppetApi.Filters;
 using shoppetApi.Helper;
-using Swashbuckle.AspNetCore.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +15,7 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();   
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(IGenericController<,,>), typeof(GenericController<,,>));
 

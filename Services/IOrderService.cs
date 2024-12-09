@@ -12,6 +12,6 @@ namespace shoppetApi.Services
         public Task<APIResponse<Order>> GetOrderById(string id);
         public Task<APIResponse<Order>> CancelOrder(string id, UpdateOrderStatusDTO updateOrderDTO);
         public Task<APIResponse<Order>> UpdateOrderStatus(int id, UpdateOrderStatusDTO updateOrderDTO);
-       
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PetShopApi.Data;
+﻿using PetShopApi.Data;
 using PetShopApi.Models;
 using shoppetApi.Interfaces;
 
@@ -9,7 +8,7 @@ namespace shoppetApi.Repository
     {
         public UserRepository(ApiDbContext context) : base(context)
         {
-            
+
         }
     }
 }

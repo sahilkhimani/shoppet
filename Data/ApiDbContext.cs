@@ -14,7 +14,7 @@ namespace PetShopApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             modelBuilder.Entity<Order>()
                        .HasOne(o => o.Buyer)
                        .WithMany(u => u.Orders)
@@ -28,9 +28,9 @@ namespace PetShopApi.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Role>().HasData(
-        new Role { Id = "1", Name = "Admin", NormalizedName = "ADMIN" , RoleDescription ="Admin Role" },
-        new Role { Id = "2", Name = "Seller", NormalizedName = "SELLER" , RoleDescription = "Seller Role"},
-        new Role { Id = "3", Name = "Buyer", NormalizedName = "BUYER" , RoleDescription = "Buyer Role"}
+        new Role { Id = "1", Name = "Admin", NormalizedName = "ADMIN", RoleDescription = "Admin Role" },
+        new Role { Id = "2", Name = "Seller", NormalizedName = "SELLER", RoleDescription = "Seller Role" },
+        new Role { Id = "3", Name = "Buyer", NormalizedName = "BUYER", RoleDescription = "Buyer Role" }
     );
             modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(x => new { x.LoginProvider, x.ProviderKey });
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });

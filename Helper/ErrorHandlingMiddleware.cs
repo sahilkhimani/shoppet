@@ -5,6 +5,7 @@ namespace shoppetApi.Helper
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private const string errorOccuredMsg = "An Error Occured while processing your request";
 
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
@@ -15,11 +16,11 @@ namespace shoppetApi.Helper
         {
             try
             {
-                await _next(context); 
+                await _next(context);
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex); 
+                await HandleExceptionAsync(context, ex);
             }
         }
 
@@ -28,9 +29,8 @@ namespace shoppetApi.Helper
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            var response = new { message = "An error occurred while processing your request." };
+            var response = new { message = errorOccuredMsg };
             var jsonResponse = JsonSerializer.Serialize(response);
-
             return context.Response.WriteAsync(jsonResponse);
         }
     }

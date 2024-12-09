@@ -3,24 +3,8 @@
   "WorkspaceRootPath": "D:\\C#\\petshop-API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\helper\\httpcontexthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\httpcontexthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\helper\\messageconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:helper\\messageconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|d:\\c#\\petshop-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0BE3298D-E4B6-454F-978D-2F3661CB5A60}|shoppetApi.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,70 +14,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HttpContextHelper.cs",
-              "DocumentMoniker": "D:\\C#\\petshop-API\\Helper\\HttpContextHelper.cs",
-              "RelativeDocumentMoniker": "Helper\\HttpContextHelper.cs",
-              "ToolTip": "D:\\C#\\petshop-API\\Helper\\HttpContextHelper.cs",
-              "RelativeToolTip": "Helper\\HttpContextHelper.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAUwBMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T15:24:49.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\C#\\petshop-API\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Services\\UserService.cs",
-              "ToolTip": "D:\\C#\\petshop-API\\Services\\UserService.cs",
-              "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAkwGYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:21:12.943Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\C#\\petshop-API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\C#\\petshop-API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-09T12:40:22.097Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MessageConstants.cs",
-              "DocumentMoniker": "D:\\C#\\petshop-API\\Helper\\MessageConstants.cs",
-              "RelativeDocumentMoniker": "Helper\\MessageConstants.cs",
-              "ToolTip": "D:\\C#\\petshop-API\\Helper\\MessageConstants.cs",
-              "RelativeToolTip": "Helper\\MessageConstants.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwCAAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T15:11:46.437Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\C#\\petshop-API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\C#\\petshop-API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAswEwAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:18:59.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "D:\\C#\\petshop-API\\Services\\IUserService.cs",
-              "RelativeDocumentMoniker": "Services\\IUserService.cs",
-              "ToolTip": "D:\\C#\\petshop-API\\Services\\IUserService.cs",
-              "RelativeToolTip": "Services\\IUserService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:21:09.355Z"
             }
           ]
         }

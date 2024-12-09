@@ -1,6 +1,4 @@
 ﻿using System.Security.Cryptography;
-using System;
-using System.Text;
 
 
 namespace shoppetApi.Helper
@@ -46,4 +44,4 @@ namespace shoppetApi.Helper
             }
         }
     }
-    }
+}

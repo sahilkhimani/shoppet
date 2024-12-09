@@ -82,7 +82,7 @@ namespace shoppetApi.Controllers
         public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
         {
             try
-            { 
+            {
                 var result = await _genericService.Update(id, dto);
                 if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);

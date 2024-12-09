@@ -1,15 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using PetShopApi.Models;
 using shoppetApi.DTO;
+using shoppetApi.Filters;
 using shoppetApi.Helper;
-using shoppetApi.Interfaces;
 using shoppetApi.Services;
-using System.Runtime.InteropServices;
-using System.Security.Claims;
 
 namespace shoppetApi.Controllers
 {
@@ -18,43 +13,25 @@ namespace shoppetApi.Controllers
     [ApiController]
     public class PetController : GenericController<Pet, PetDTO, PetDTO>
     {
-        private readonly IMapper _mapper;
-        private readonly IGenericService<Pet, PetDTO, PetDTO> _genericService;
         private readonly IPetService _petService;
 
-        public PetController(IMapper mapper, IGenericService<Pet, PetDTO, PetDTO> genericService, IPetService petService) : base(genericService)
+        private const string Admin = Roles.Admin;
+        private const string Seller = Roles.Seller;
+
+        public PetController(IGenericService<Pet, PetDTO, PetDTO> genericService, IPetService petService) : base(genericService)
         {
-            _mapper = mapper;   
-            _genericService = genericService;
             _petService = petService;
         }
 
+        [Authorize(Roles = $"{Admin},{Seller}")]
+        [ValidateModelState]
         [HttpPost("Add")]
         public override async Task<ActionResult<Pet>> Add([FromBody] PetDTO petDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
-                var checkData = await _petService.CheckUser(petDTO);
-                if (checkData == MessageConstants.UnAuthenticatedUserMessage || checkData == MessageConstants.NotExistsBreed
-                    || checkData == MessageConstants.WrongGender)
-                {
-                    return BadRequest(checkData);
-                }
-
-                var data = _mapper.Map<Pet>(petDTO);
-                data.OwnerId = checkData;
-                data.PetName = _genericService.ApplyTitleCase(data.PetName);
-
-                var result = await _genericService.Add(petDTO); //changed data to petDTO
-                if (!result.Success)
-                {
-                    return Conflict(result.Message);
-                }
-
+                var result = await _petService.Add(petDTO);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result.Message);
             }
             catch (Exception ex)
@@ -68,13 +45,9 @@ namespace shoppetApi.Controllers
         {
             try
             {
-                var ownPet = await _petService.CheckOwnPets(id);
-                if (ownPet == MessageConstants.InvalidId || ownPet == MessageConstants.DataNotFound)
-                {
-                    return BadRequest(ownPet);
-                }
-                if (ownPet == MessageConstants.UnAuthorizedUserMessage) return Unauthorized(ownPet);
-                return await base.Delete(id);
+                var result = await _petService.Delete(id);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -82,28 +55,15 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [ValidateModelState]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Pet>> Update(string id, [FromBody] PetDTO petDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
-                var checkData = await _petService.CheckUser(petDTO);
-                if (checkData == MessageConstants.NoUserFoundMessage || checkData == MessageConstants.NotExistsBreed
-                    || checkData == MessageConstants.WrongGender)
-                {
-                    return BadRequest(checkData);
-                }
-                var ownPet = await _petService.CheckOwnPets(id);
-                if (ownPet == MessageConstants.InvalidId || ownPet == MessageConstants.DataNotFound)
-                {
-                    return BadRequest(ownPet);
-                }
-                if (ownPet == MessageConstants.UnAuthorizedUserMessage) return Unauthorized(ownPet);
-                return await base.Update(id, petDTO);
+                var result = await _petService.Update(id, petDTO);
+                if (!result.Success) return BadRequest(result.Message);
+                return Ok(result.Message);
             }
             catch (Exception ex)
             {
@@ -117,7 +77,7 @@ namespace shoppetApi.Controllers
             try
             {
                 var result = await _petService.GetPetsByBreedId(id);
-                if (!result.Success) return NotFound(result.Message);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -162,7 +122,7 @@ namespace shoppetApi.Controllers
             try
             {
                 var result = await _petService.GetPetsByGender(gender);
-                if (!result.Success) return NotFound(result.Message);
+                if (!result.Success) return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -171,6 +131,7 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [Authorize(Roles = $"{Admin},{Seller}")]
         [HttpGet("GetYourPets")]
         public async Task<ActionResult> GetYourPets()
         {

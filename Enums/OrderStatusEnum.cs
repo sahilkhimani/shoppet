@@ -2,11 +2,11 @@
 {
     public enum OrderStatusEnum
     {
-        Pending = 1,
-        Processing = 2,
-        Shipped = 3,
-        Failed = 4,
-        Delivered = 5,
-        Cancelled = 6
+        pending = 1,
+        processing = 2,
+        shipped = 3,
+        failed = 4,
+        delivered = 5,
+        cancelled = 6
     }
 }

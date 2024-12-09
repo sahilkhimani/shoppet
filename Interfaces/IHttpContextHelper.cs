@@ -1,6 +1,4 @@
-﻿using Microsoft.Identity.Client;
-
-namespace shoppetApi.Interfaces
+﻿namespace shoppetApi.Interfaces
 {
     public interface IHttpContextHelper
     {
