@@ -18,7 +18,6 @@ namespace shoppetApi.Controllers
             _breedService = breedService;
         }
 
-        [ValidateModelState]
         [HttpPost("Create")]
         public override async Task<ActionResult<Breed>> Add([FromBody] BreedDTO breedDTO)
         {
@@ -47,7 +46,7 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-        [ValidateModelState]
+
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Breed>> Update(string id, [FromBody] BreedDTO breedDTO)
         {

@@ -16,7 +16,6 @@ namespace shoppetApi.Controllers
             _genericService = genericService;
         }
 
-        [ValidateModelState]
         [HttpPost("Create")]
         public virtual async Task<ActionResult<T>> Add([FromBody] TAdd dto)
         {
@@ -77,7 +76,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [HttpPut("Update/{id}")]
         public virtual async Task<ActionResult<T>> Update(string id, [FromBody] TUpdate dto)
         {

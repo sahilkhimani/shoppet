@@ -24,7 +24,6 @@ namespace shoppetApi.Controllers
         }
 
         [Authorize(Roles = $"{Admin},{Seller}")]
-        [ValidateModelState]
         [HttpPost("Add")]
         public override async Task<ActionResult<Pet>> Add([FromBody] PetDTO petDTO)
         {
@@ -55,7 +54,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Pet>> Update(string id, [FromBody] PetDTO petDTO)
         {

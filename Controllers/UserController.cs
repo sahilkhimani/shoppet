@@ -20,7 +20,6 @@ namespace shoppetApi.Controllers
             _userService = userService;
         }
 
-        [ValidateModelState]
         [HttpPost("Register")]
         public override async Task<ActionResult<User>> Add([FromBody] UserRegistrationDTO userRegistrationDto)
         {
@@ -37,7 +36,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [HttpPost("Login")]
         public async Task<ActionResult<User>> Login([FromBody] UserLoginDTO userLoginDTO)
         {
@@ -99,7 +97,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [Authorize]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<User>> Update(string id, [FromBody] UserUpdateDTO userUpdateDTO)

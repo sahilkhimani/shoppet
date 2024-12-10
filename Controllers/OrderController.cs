@@ -23,7 +23,6 @@ namespace shoppetApi.Controllers
             _orderService = orderService;
         }
 
-        [ValidateModelState]
         [Authorize(Roles = $"{Admin},{Buyer}")]
         [HttpPost("CreateOrder")]
         public override async Task<ActionResult<Order>> Add([FromBody] AddOrderDTO addOrderDTO)
@@ -71,7 +70,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [Authorize(Roles = $"{Buyer}, {Admin}")]
         [HttpPut("CancelOrder/{id}")]
         public override async Task<ActionResult<Order>> Update(string id, [FromBody] UpdateOrderStatusDTO updateOrderDTO)
@@ -111,7 +109,6 @@ namespace shoppetApi.Controllers
             }
         }
 
-        [ValidateModelState]
         [Authorize(Roles = $"{Seller}, {Admin}")]
         [HttpPut("UpdateOrderStatus/{id}")]
         public async Task<ActionResult<Order>> UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusDTO updateOrderDTO)
