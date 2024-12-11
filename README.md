@@ -67,12 +67,16 @@ cd shoppet
 ### **Database Configuration**
 1. Ensure you have **SQL Server** installed and running.
 2. Open the `appsettings.json` file and update the connection string:
+3. Also add the key there create your own random key. The key should be lengthy otherwise you will get an error.
    ```json
+   {
+   "Key": "CREATEYOUROWNLENGTHYKEYTORUNTHISAPIPROJECT",
+   }
    "ConnectionStrings": {
        "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=PetShopDB;Trusted_Connection=True;"
    }
    ```
-3. Run the following command to apply migrations and update the database:
+4. Run the following command to apply migrations and update the database:
    Run this command in console manager to apply migrations
    ```bash
    Update-Database
