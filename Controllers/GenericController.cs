@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using shoppetApi.Filters;
 using shoppetApi.Helper;
 using shoppetApi.Services;
 

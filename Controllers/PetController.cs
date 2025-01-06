@@ -8,7 +8,6 @@ using shoppetApi.Services;
 
 namespace shoppetApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PetController : GenericController<Pet, PetDTO, PetDTO>
@@ -38,7 +37,7 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public override async Task<ActionResult<Pet>> Delete(string id)
         {
@@ -53,7 +52,7 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
-
+        [Authorize]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Pet>> Update(string id, [FromBody] PetDTO petDTO)
         {

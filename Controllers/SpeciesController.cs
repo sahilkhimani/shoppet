@@ -19,6 +19,7 @@ namespace shoppetApi.Controllers
             _speciesService = speciesService;
         }
 
+        [Authorize]
         [HttpPost("Create")]
         public override async Task<ActionResult<Species>> Add([FromBody] SpeciesDTO speciesDTO)
         {
@@ -48,6 +49,7 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Species>> Update(string id, [FromBody] SpeciesDTO speciesDTO)
         {

@@ -18,6 +18,7 @@ namespace shoppetApi.Controllers
             _breedService = breedService;
         }
 
+        [Authorize]
         [HttpPost("Create")]
         public override async Task<ActionResult<Breed>> Add([FromBody] BreedDTO breedDTO)
         {
@@ -47,6 +48,7 @@ namespace shoppetApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("Update/{id}")]
         public override async Task<ActionResult<Breed>> Update(string id, [FromBody] BreedDTO breedDTO)
         {
