@@ -14,6 +14,19 @@ namespace shoppetApi.Helper
 {
     public static class Extension
     {
+        public static void Cors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    }); 
+            });
+        }
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextHelper, HttpContextHelper>();

@@ -16,7 +16,7 @@ builder.Services.AddControllers(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.Cors();
 builder.Services.AddScoped(typeof(IGenericController<,,>), typeof(GenericController<,,>));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -30,7 +30,7 @@ builder.Services.RegisterServices();
 
 var app = builder.Build();
 app.UseMiddleware<ErrorHandlingMiddleware>();
-
+app.UseCors("AllowAngularOrigin");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

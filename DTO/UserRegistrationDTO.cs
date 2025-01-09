@@ -12,7 +12,7 @@ namespace shoppetApi.DTO
         public string UserEmail { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!#.^%*?&])[A-Za-z\d@$!#.^%*?&]{8,}$",
             ErrorMessage = "Password must be at least 8 characters long, contain at least one uppercase letter, and one number and one special character.")]
         public string Password { get; set; }
 
