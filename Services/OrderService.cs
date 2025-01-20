@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Enums;
@@ -15,13 +16,12 @@ namespace shoppetApi.Services
         private readonly IPetRepository _petRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextHelper _contextHelper;
-        private readonly string userId;
 
         public const string PetNotExistsMessage = "Pet Not Exists";
         public const string NoOrderFoundMessage = "No Orders Yet";
         public const string OrderAlreadyCancelledMessage = "Order is already cancelled";
         public const string InvalidOperationMessage = "Invalid Operation Performed";
-
+        public const string DefaultOrderStatus = "none";
         public OrderService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextHelper httpContextHelper)
         {
             _unitOfWork = unitOfWork;
@@ -29,7 +29,6 @@ namespace shoppetApi.Services
             _petRepository = _unitOfWork.Pets;
             _mapper = mapper;
             _contextHelper = httpContextHelper;
-            userId = _contextHelper.GetCurrentUserId();
         }
         public async Task<APIResponse<Order>> CreateOrder(AddOrderDTO addOrderDTO)
         {
@@ -44,6 +43,7 @@ namespace shoppetApi.Services
 
                 var data = _mapper.Map<Order>(addOrderDTO);
                 data.TotalPrice = petData.PetPrice;
+                var userId = _contextHelper.GetCurrentUserId();
                 data.BuyerId = userId;
 
                 await _orderRepository.Add(data);
@@ -64,6 +64,7 @@ namespace shoppetApi.Services
         {
             try
             {
+                var userId = _contextHelper.GetCurrentUserId();
                 var result = await _orderRepository.GetMyOrders(userId);
                 if (result == null || !result.Any())
                 {
@@ -76,7 +77,19 @@ namespace shoppetApi.Services
                 return APIResponse<IEnumerable<Order>>.CreateResponse(false, MessageHelper.Exception(nameof(Order), MessageConstants.fetchingMessage, ex.Message), null);
             }
         }
-
+        public async Task<APIResponse<string>> GetPetOrderStatus(int id)
+        {
+            try
+            {
+                var result = await _orderRepository.GetPetOrderStatus(id);
+                if (result == null) return APIResponse<string>.CreateResponse(true, MessageHelper.Success(nameof(Order), MessageConstants.fetchedMessage), DefaultOrderStatus);
+                return APIResponse<string>.CreateResponse(true, MessageHelper.Success(nameof(Order), MessageConstants.fetchedMessage), result);
+            }
+            catch (Exception ex)
+            {
+                return APIResponse<string>.CreateResponse(false, MessageHelper.Exception(nameof(Order), MessageConstants.fetchingMessage, ex.Message), null);
+            }
+        }
         public async Task<APIResponse<Order>> GetOrderById(string id)
         {
             try
@@ -86,7 +99,7 @@ namespace shoppetApi.Services
 
                 var result = await _orderRepository.GetById(parsedId);
                 if (result == null) return APIResponse<Order>.CreateResponse(false, MessageConstants.DataNotFound, null);
-
+                var userId = _contextHelper.GetCurrentUserId();
                 var role = _contextHelper.GetCurrentUserRole();
                 if (role == Roles.Buyer)
                 {
@@ -116,6 +129,7 @@ namespace shoppetApi.Services
         {
             try
             {
+                var userId = _contextHelper.GetCurrentUserId();
                 var result = await _orderRepository.GetSellerOrderList(userId);
                 if (result == null || !result.Any())
                 {
@@ -168,7 +182,7 @@ namespace shoppetApi.Services
                 var data = await GetOrderById(id);
                 if (!data.Success || data.Data == null) return data;
                 var parsedId = HelperMethods.ParseId(id);
-
+                var userId = _contextHelper.GetCurrentUserId();
                 if (userId != data.Data.BuyerId)
                 {
                     return APIResponse<Order>.CreateResponse(false, MessageConstants.UnAuthorizedUserMessage, null);
@@ -200,6 +214,7 @@ namespace shoppetApi.Services
             try
             {
                 if (id <= 0) return APIResponse<Order>.CreateResponse(false, MessageConstants.InvalidId, null);
+                var userId = _contextHelper.GetCurrentUserId();
                 var data = await _orderRepository.GetOrderToUpdateStatus(userId, id);
                 if (data == null) return APIResponse<Order>.CreateResponse(false, MessageConstants.DataNotFound, null);
 

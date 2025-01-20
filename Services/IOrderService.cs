@@ -1,4 +1,5 @@
-﻿using PetShopApi.Models;
+﻿using Microsoft.Identity.Client;
+using PetShopApi.Models;
 using shoppetApi.DTO;
 using shoppetApi.Helper;
 
@@ -12,6 +13,7 @@ namespace shoppetApi.Services
         public Task<APIResponse<Order>> GetOrderById(string id);
         public Task<APIResponse<Order>> CancelOrder(string id, UpdateOrderStatusDTO updateOrderDTO);
         public Task<APIResponse<Order>> UpdateOrderStatus(int id, UpdateOrderStatusDTO updateOrderDTO);
+        public Task<APIResponse<string>> GetPetOrderStatus(int id);
 
     }
 }

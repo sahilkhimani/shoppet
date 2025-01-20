@@ -33,7 +33,7 @@ namespace shoppetApi.Controllers
                 return Ok(result.Message);
             }
             catch (Exception ex)
-            {
+            {   
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }

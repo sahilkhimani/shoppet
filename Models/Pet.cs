@@ -35,7 +35,6 @@ namespace PetShopApi.Models
         public string OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         public User Owner { get; set; }
-
         public ICollection<Order> Orders { get; set; }
     }
 }

@@ -124,5 +124,21 @@ namespace shoppetApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet("GetPetOrderStatus/{id}")]
+        public async Task<ActionResult<string>> GetPetStatus(int id)
+        {
+            try
+            {
+                var result = await _orderService.GetPetOrderStatus(id);
+                if (!result.Success) return BadRequest(result.Data);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.ErrorOccurred(ex.Message));
+            }
+        }
     }
 }

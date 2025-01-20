@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using PetShopApi.Data;
 using PetShopApi.Models;
 using shoppetApi.Enums;
@@ -31,6 +32,16 @@ namespace shoppetApi.Repository
             return order;
         }
 
+        public async Task<string> GetPetOrderStatus(int id)
+        {
+            var status = await _context.Orders
+                 .Where(o => o.PetId == id)
+                  .OrderByDescending(o => o.OrderDate)
+                 .Select(o => o.OrderStatus)
+                 .FirstOrDefaultAsync();
+            return status;
+        }
+
         public async Task<IEnumerable<Order>> GetSellerOrderList(string id)
         {
             var orderList = await _context.Orders
@@ -59,5 +70,6 @@ namespace shoppetApi.Repository
             }
             return true;
         }
+
     }
 }

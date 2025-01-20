@@ -13,6 +13,7 @@ namespace shoppetApi.Helper
         public string GetCurrentUserId()
         {
             HttpContext? httpContext = _httpContextAccessor.HttpContext;
+            if (httpContext?.Session == null) return "";
             return httpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         }
         public string GetCurrentUserRole()
