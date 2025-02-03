@@ -36,7 +36,8 @@ namespace shoppetApi.Repository
         {
             var status = await _context.Orders
                  .Where(o => o.PetId == id)
-                  .OrderByDescending(o => o.OrderDate)
+                 .OrderByDescending(o => o.OrderDate)
+                 .ThenByDescending(o => o.OrderId)
                  .Select(o => o.OrderStatus)
                  .FirstOrDefaultAsync();
             return status;

@@ -27,6 +27,13 @@ builder.Services.JwtAuth(builder.Configuration);
 builder.Services.RegisterUnitOfWork();
 builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 app.UseMiddleware<ErrorHandlingMiddleware>();
@@ -37,7 +44,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
+app.UseSession();
 app.UseAuthentication();
 
 app.UseAuthorization();
