@@ -10,5 +10,6 @@ namespace shoppetApi.Interfaces
         public Task<IEnumerable<Pet>> GetPetsByAgeRange(int minAge, int maxAge);
         public Task<IEnumerable<Pet>> GetPetsByGender(string gender);
         public Task<IEnumerable<Pet>> GetYourPets(string id);
+        public Task<bool> PetExists(string id);
     }
 }

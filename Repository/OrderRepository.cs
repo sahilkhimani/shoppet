@@ -72,5 +72,17 @@ namespace shoppetApi.Repository
             return true;
         }
 
+        public async Task<bool> PetBuyerExists(string id)
+        {
+            var data = await _context.Orders
+                .AsNoTracking()
+                .Where(x => x.BuyerId == id)
+                .ToListAsync();
+            if (data.Any())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

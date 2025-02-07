@@ -15,16 +15,22 @@ namespace shoppetApi.Services
         private readonly IRoleRepository _roleRepository;
         private readonly JwtTokenService _jwtTokenService;
         private readonly IHttpContextHelper _contextHelper;
+        private readonly IPetRepository _petRepository;
+        private readonly IOrderRepository _orderRepository;
+        const string petExistErrorMessage = "You cannot delete your account because your pets exists";
+        const string OrderExistErrorMessage = "You cannot delete your account because your orders exists";
+
         public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, JwtTokenService jwtTokenService, IHttpContextHelper contextHelper)
         {
 
             _mapper = mapper;
             _userManager = userManager;
             _roleRepository = unitOfWork.Roles;
+            _petRepository = unitOfWork.Pets;
+            _orderRepository = unitOfWork.Orders;
             _jwtTokenService = jwtTokenService;
             _contextHelper = contextHelper;
         }
-
         public async Task<APIResponse<User>> RegisterUser(UserRegistrationDTO userRegistrationDTO)
         {
             try
@@ -120,6 +126,17 @@ namespace shoppetApi.Services
             {
                 var user = await GetById(id);
                 if (!user.Success || user.Data == null) return user;
+                var role = _contextHelper.GetCurrentUserRole();
+                if (role == Roles.Seller || role == Roles.Admin)
+                {
+                    var petExists = await _petRepository.PetExists(id);
+                    if (petExists) return APIResponse<User>.CreateResponse(false, petExistErrorMessage, null);
+                }
+                if (role == Roles.Buyer || role == Roles.Admin)
+                {
+                    var OrderExists = await _orderRepository.PetBuyerExists(id);
+                    if (OrderExists) return APIResponse<User>.CreateResponse(false, OrderExistErrorMessage, null);
+                }
                 var result = await _userManager.DeleteAsync(user.Data);
                 if (!result.Succeeded) return APIResponse<User>.CreateResponse(false, result.Errors.First().Description, null);
                 return APIResponse<User>.CreateResponse(true, MessageHelper.Success(nameof(User), MessageConstants.deletedMessage), null);

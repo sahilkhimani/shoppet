@@ -9,5 +9,6 @@ namespace shoppetApi.Interfaces
         public Task<IEnumerable<Order>> GetSellerOrderList(string id);
         public Task<Order> GetOrderToUpdateStatus(string userId, int id);
         public Task<string> GetPetOrderStatus(int id);
+        public Task<bool> PetBuyerExists(string id);
     }
 }

@@ -61,5 +61,18 @@ namespace shoppetApi.Repository
                 .Where(x => x.OwnerId == id)
                 .ToListAsync();
         }
+
+        public async Task<bool> PetExists(string id)
+        {
+            var pets = await _context.Pets
+                .AsNoTracking()
+                .Where(x => x.OwnerId == id)
+                .ToListAsync();
+            if (pets.Any())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
