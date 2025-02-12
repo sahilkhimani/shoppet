@@ -17,8 +17,8 @@ namespace shoppetApi.Services
         private readonly IHttpContextHelper _contextHelper;
         private readonly IPetRepository _petRepository;
         private readonly IOrderRepository _orderRepository;
-        const string petExistErrorMessage = "You cannot delete your account because your pets exists";
-        const string OrderExistErrorMessage = "You cannot delete your account because your orders exists";
+        const string petExistErrorMessage = "You cannot delete account because user pets exists";
+        const string OrderExistErrorMessage = "You cannot delete account because user orders exists";
 
         public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, JwtTokenService jwtTokenService, IHttpContextHelper contextHelper)
         {

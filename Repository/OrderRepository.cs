@@ -84,5 +84,17 @@ namespace shoppetApi.Repository
             }
             return false;
         }
+
+        public async Task<bool> PetOrderExists(int id)
+        {
+            var exists = await _context.Orders
+                .Where(x => x.PetId == id)
+                .FirstOrDefaultAsync();
+            if (exists == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

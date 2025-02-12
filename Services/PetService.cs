@@ -12,6 +12,7 @@ namespace shoppetApi.Services
     {
         private readonly IPetRepository _petRepository;
         private readonly IBreedRepository _breedRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHttpContextHelper _httpContextHelper;
         private readonly IMapper _mapper;
@@ -20,13 +21,14 @@ namespace shoppetApi.Services
         public const string femaleGender = "Female";
         public const string NotExistsBreedMessage = "Breed Not Exists";
         public const string WrongGenderMessage = "Please Select the right gender";
-
+        public const string PetOrderExistsMessage = "Cannot Delete Pet. Pet Order Exists.";
 
         public PetService(IUnitOfWork unitOfWork, IHttpContextHelper httpContextHelper, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _petRepository = _unitOfWork.Pets;
             _breedRepository = _unitOfWork.Breeds;
+            _orderRepository = _unitOfWork.Orders;
             _httpContextHelper = httpContextHelper;
             _mapper = mapper;
         }
@@ -40,6 +42,7 @@ namespace shoppetApi.Services
 
                 var data = _mapper.Map<Pet>(petDTO);
                 data.OwnerId = details.Message;
+                data.PetName = HelperMethods.ApplyTitleCase(data.PetName);
 
                 await _petRepository.Add(data);
                 await _unitOfWork.SaveAsync();
@@ -87,6 +90,10 @@ namespace shoppetApi.Services
 
                 var data = await _petRepository.GetById(parsedId);
                 if (data == null) return APIResponse<Pet>.CreateResponse(false, MessageConstants.DataNotFound, null);
+
+                var petId = Convert.ToInt32(id);
+                var petOrderExists = await _orderRepository.PetOrderExists(petId);
+                if(petOrderExists) return APIResponse<Pet>.CreateResponse(false, PetOrderExistsMessage, null);
 
                 var ownPet = CheckOwnPets(parsedId);
                 if (!ownPet.Success) return ownPet;
